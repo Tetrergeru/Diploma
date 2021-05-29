@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+    tags:
+    - '*'
 jobs:
   build-docker-image:
     runs-on: ubuntu-latest
@@ -16,3 +18,4 @@ jobs:
       with:
         bodyFile: "arutyunov - thesis.pdf"
         token: ${{ secrets.GITHUB_TOKEN }}
+        tag: latest
