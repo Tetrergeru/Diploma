@@ -13,6 +13,6 @@ jobs:
     - run: docker run -v $PWD:"/work" -w /work texlive/texlive pdflatex "arutyunov - thesis.tex"
     - uses: ncipollo/release-action@v1
       with:
-        bodyFile: "arutyunov - thesis.pdf"
+        artifact: "arutyunov - thesis.pdf"
         token: ${{ secrets.GITHUB_TOKEN }}
         tag: latest
