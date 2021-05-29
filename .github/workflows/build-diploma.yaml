@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: docker build -t latex .
-    - run: docker run -v $PWD:"/work" -w /work latex pdflatex arutyunov-thesis.tex
-    - run: docker run -v $PWD:"/work" -w /work latex pdflatex arutyunov-thesis.tex
+    - uses: xu-cheng/latex-action@v2
+      with:
+        root_file: arutyunov-thesis.tex
     - uses: softprops/action-gh-release@v1
       with:
         body: My diploma, latest verrsion!
