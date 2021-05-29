@@ -21,7 +21,7 @@ jobs:
       with:
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache-new
-        tags: latex
+        tags: latex:latest
         context: .
         push: false
     - run: docker create --name img latex
