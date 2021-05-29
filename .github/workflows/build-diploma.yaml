@@ -10,9 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: docker run -v $PWD:"/work" -w /work texlive/texlive pdflatex "arutyunov - thesis.tex"
+    - uses: docker/build-push-action@v2
+      with:
+        cache-from: type=local,src=/tmp/.buildx-cache
+        cache-to: type=local,dest=/tmp/.buildx-cache-new
+        tags: latex
+        context: .
+        push: false
+    - run: docker create --name img latex
+    - run: docker cp "img:/work/arutyunov - thesis.pdf" "arutyunov - thesis.pdf"
     - uses: ncipollo/release-action@v1
       with:
         artifact: "arutyunov - thesis.pdf"
         token: ${{ secrets.GITHUB_TOKEN }}
         tag: latest
+        allowUpdates: true
