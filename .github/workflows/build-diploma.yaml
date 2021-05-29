@@ -10,8 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: docker run -v $PWD:"/work" -w /work texlive/texlive pdflatex arutyunov-thesis.tex
-    - run: docker run -v $PWD:"/work" -w /work texlive/texlive pdflatex arutyunov-thesis.tex
+    - run: docker build -t latex .
+    - run: docker run -v $PWD:"/work" -w /work latex pdflatex arutyunov-thesis.tex
+    - run: docker run -v $PWD:"/work" -w /work latex pdflatex arutyunov-thesis.tex
     - uses: softprops/action-gh-release@v1
       with:
         body: My diploma, latest verrsion!
