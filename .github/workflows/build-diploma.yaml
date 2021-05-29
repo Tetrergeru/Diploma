@@ -19,9 +19,11 @@ jobs:
         push: false
     - run: docker create --name img latex
     - run: docker cp "img:/work/arutyunov - thesis.pdf" "arutyunov - thesis.pdf"
-    - uses: ncipollo/release-action@v1
+    - uses: softprops/action-gh-release@v1
       with:
-        artifact: "arutyunov - thesis.pdf"
-        token: ${{ secrets.GITHUB_TOKEN }}
-        tag: latest
+        files: "arutyunov - thesis.pdf"
+        name: latest
         allowUpdates: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
