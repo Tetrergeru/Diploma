@@ -1,5 +1,7 @@
 FROM texlive/texlive
 
-ADD ./* .
+ADD ./* /work/
+
+WORKDIR /work 
 
 RUN pdflatex "arutyunov - thesis.tex"

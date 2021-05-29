@@ -14,8 +14,8 @@ jobs:
       with:
         context: .
         push: false
-    - run: "ls -lA"
-    - run: "pwd"
+        build-args: 
+        - "-v $PWD:'/work'"
     - uses: ncipollo/release-action@v1
       with:
         bodyFile: "arutyunov - thesis.pdf"
