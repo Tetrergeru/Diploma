@@ -4,4 +4,4 @@ ADD ./* /work/
 
 WORKDIR /work 
 
-RUN pdflatex "arutyunov - thesis.tex"
+RUN pdflatex "arutyunov-thesis.tex"
