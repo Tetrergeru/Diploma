@@ -13,11 +13,11 @@ jobs:
     - uses: xu-cheng/latex-action@v2
       with:
         root_file: arutyunov-thesis.tex
-    - uses: softprops/action-gh-release@v1
+    - uses: svenstaro/upload-release-action@v2
       with:
-        body: My diploma, latest verrsion!
-        files: "arutyunov-thesis.pdf"
-        tag_name: latest
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: arutyunov-thesis.pdf
+        tag: latest
+        overwrite: true
+        body: "My diploma, latest verrsion!"
 
