@@ -1,7 +1,7 @@
-FROM texlive/texlive
+# FROM texlive/texlive
 
 ADD ./* /work/
 
 WORKDIR /work 
 
-RUN pdflatex "arutyunov - thesis.tex"
+RUN touch "arutyunov - thesis.tex"
