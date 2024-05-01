@@ -291,3 +291,7 @@ TSWLatexianTemp*
 #*Notes.bib
 
 __latexindent_temp.tex
+
+*.png~
+*.kra
+*.kra~
