@@ -1,0 +1,30 @@
+\documentclass[14pt]{mmcs-article}
+\usepackage[russian]{babel}
+\usepackage{amsmath, amsthm, amsfonts, amssymb}
+\usepackage{listings, listings-rust}
+
+\graphicspath{{paper_images/}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{notice}{Notice}
+
+% \newcounter{notice}[section]
+% \newenvironment{notice}[1][]{\refstepcounter{notice}\par\medskip
+%     \noindent \textbf{Замечание~\thenotice. #1} \rmfamily
+% }
+% {\medskip}
+
+\newcounter{definition}[section]
+\newenvironment{definition}[1][]{\refstepcounter{definition}\par\medskip
+    \noindent \textbf{Определение~\thedefinition. #1} \rmfamily
+}
+{\medskip}
+
+\begin{document}
+
+\renewcommand{\mod}[1]{\textrm{mod}\ #1}
+
+
+\section{Основные понятия и утверждения}
+
+
+\end{document}
