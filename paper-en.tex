@@ -15,7 +15,7 @@
 
 \newcounter{definition}[section]
 \newenvironment{definition}[1][]{\refstepcounter{definition}\par\medskip
-    \noindent \textbf{Определение~\thedefinition. #1} \rmfamily
+    \noindent \textbf{Definition~\thedefinition. #1} \rmfamily
 }
 {\medskip}
 
@@ -24,7 +24,183 @@
 \renewcommand{\mod}[1]{\textrm{mod}\ #1}
 
 
-\section{Основные понятия и утверждения}
+\section{Main definitions}
 
+Let us give main definitions that are used onwards. We will use the definition of a bipartite graph based on a definition 7.1 given in a book <<Дискретная Математика>> Я.М. Ерусалимского % Сослаться на книжку Татта (Tutte) 
+
+\begin{definition}
+    A bipartite graph is a triple $G(V, E, f)$
+    ($V$ is a set of vertices,
+    $E$ is a set of edges,
+    $f$ is an incidence function mapping every edge to an ordered pair of vertices),
+    such that:
+
+    \begin{itemize}
+        \item $V = A \cup B$ and $A \cap B = \emptyset$ ;
+        \item $f: E \rightarrow A \times B$ ;
+    \end{itemize}
+
+\end{definition}
+
+\begin{definition}
+    Sequence of edges $\mu = (e_1, ..., e_d)$, such that $e_i \neq e_{i+1}$ for all $i < d$, is called a path with first vertex $v_0$ and last vertex $v_d$ on graph $G(V,E,f)$, if exists a sequence of vertices $(v_0, ..., v_d)$ such that $\forall i = 1,...,d:$ $(v_i, v_{i+1}) = f(e_i)$ or $(v_{i+1}, v_i) = f(e_i)$. 
+
+\end{definition}
+
+\begin{definition}
+    A cycle is a path, for which the first and the last vertices are equal.
+\end{definition}
+
+\begin{definition}
+    Let $G$ be a graph. The girth of $G$ is the length of it's shortest cycle.
+\end{definition}
+
+\begin{notice}
+    Girth of any bipartite graph is even.
+\end{notice}
+
+It is known that graphs with higher girth have the most practical application. % Добавить цитату
+
+\begin{definition}
+    Let $\mu = (e_1, \dots, e_d)$ be a path on graph $G$. Characteristic of edges on path $\mu$ is the function $\chi_\mu: E \to \mathbb{Z}$ such that:
+
+    \[
+        \begin{array}{ll}
+            \chi_{\mu}(e_1) = \left\{
+                \begin{array}{ll}
+                1,  & v_0 \in A; \\
+                -1, & v_0 \in B. \\
+                \end{array}
+            \right. \\
+            \chi_\mu(e_i) = -\chi_\mu(e_{i-1})\;\;\forall\, i \in 2, \dots, d\\
+        \end{array}
+    \]
+\end{definition}
+
+\section{Metagraphs}
+
+Consider weighted bipartite graphs that can be used to build larger graphs with similar structure.
+
+\begin{definition}
+    Consider $G(V,E,f)$ a bipartite graph. A quadriple $G'(V,E,f,w)$ is called a metagraph, where $w: E \to \mathbb{Z}$ is a function mapping edges to their weights.
+\end{definition}
+
+ \ref{image:2} представлен метаграф  $G_1$ с тремя вершинами и четырьмя дугами.
+
+\begin{figure}[H]
+    \centering
+    \begin{picture}(150,200)
+        \put(75,165){\thicklines{\circle*{5}}}
+        \put(70,170){$c_1$}
+    
+        \put(35,35){\thicklines{\circle*{5}}}
+        \put(30,20){$i_1$}
+    
+        \put(115,35){\thicklines{\circle*{5}}}
+        \put(110,20){$i_2$}
+    
+        \bezier{300}(75,165)(10,100)(35,35)
+        \put(5,100){$+1$}
+
+        \bezier{300}(75,165)(56,100)(35,35)
+        \put(56,80){$0$}
+    
+        \bezier{300}(75,165)(140,100)(115,35)
+        \put(125,100){$-1$}
+
+        \bezier{300}(75,165)(94,100)(115,35)
+        \put(87,80){$0$}
+    \end{picture}
+    \caption{ Метаграф с весами дуг +1, 0, 0, -1.. }
+    \label{image:2}
+\end{figure}
+
+\begin{definition}
+    Пусть $r \in \mathbb{N}$, тогда $r$-расширением метаграфа $G'(V,E,f,w)$ назовём граф $G^{(r)}(V^{(r)}, E^{(r)}, f^{(r)})$ построенный следующим образом: для каждой вершины $v \in V$ ставится в соответствие множество вершин $\{ v^{(1)}, ..., v^{(r)} \}$; для каждой дуги $e \in E$ ставится в соответствие множество дуг $\{ e^{(1)}, ..., e^{(r)} \}$, при этом если $f(e) = (a, b)$, тогда $f^{(r)}(e^{(i)}) = (a^{(i)}, b^{(i + w(e) (\mod{r}))})$ $\forall i = 1,...,r$.
+\end{definition}
+
+\begin{notice}
+    Множества вершин и дуг расширения устроены следующим образом:
+    \[
+        V^{(r)} = \bigcup_{v \in V} \{ v^{(1)}, ..., v^{(r)} \};\;\;\;
+        E^{(r)} = \bigcup_{e \in E} \{ e^{(1)}, ..., e^{(r)} \}.
+    \]
+\end{notice}
+
+На рисунке. \ref{image:3} изображён граф, полученный 4-расширением метаграфа $G_1$, изображённого на рисунке \ref{image:2}.
+
+\begin{figure}[H]
+    \centering
+    \begin{picture}(450,200)
+        \put(75,165){\thicklines{\circle*{5}}}
+        \put(70,170){$c_1$}
+        \put(35,35){\thicklines{\circle*{5}}}
+        \put(30,20){$i_1$}
+        \put(115,35){\thicklines{\circle*{5}}}
+        \put(110,20){$i_2$}
+
+        \bezier{300}(75,165)(56,100)(35,35)
+        \bezier{300}(75,165)(94,100)(115,35)
+        \bezier{300}(75,165)(130,100)(135,35)
+        \bezier{300}(175,165)(120,100)(115,35)
+
+        \put(175,165){\thicklines{\circle*{5}}}
+        \put(170,170){$c_1$}
+        \put(135,35){\thicklines{\circle*{5}}}
+        \put(130,20){$i_1$}
+        \put(215,35){\thicklines{\circle*{5}}}
+        \put(210,20){$i_2$}
+
+        \bezier{300}(175,165)(156,100)(135,35)
+        \bezier{300}(175,165)(194,100)(215,35)
+        \bezier{300}(175,165)(230,100)(235,35)
+        \bezier{300}(275,165)(220,100)(215,35)
+
+
+        \put(275,165){\thicklines{\circle*{5}}}
+        \put(270,170){$c_1$}
+        \put(235,35){\thicklines{\circle*{5}}}
+        \put(230,20){$i_1$}
+        \put(315,35){\thicklines{\circle*{5}}}
+        \put(310,20){$i_2$}
+
+        \bezier{300}(275,165)(256,100)(235,35)
+        \bezier{300}(275,165)(294,100)(315,35)
+        \bezier{300}(275,165)(330,100)(335,35)
+        \bezier{300}(375,165)(320,100)(315,35)
+
+
+        \put(375,165){\thicklines{\circle*{5}}}
+        \put(370,170){$c_1$}
+        \put(335,35){\thicklines{\circle*{5}}}
+        \put(330,20){$i_1$}
+        \put(415,35){\thicklines{\circle*{5}}}
+        \put(410,20){$i_2$}
+
+        \bezier{300}(375,165)(356,100)(335,35)
+        \bezier{300}(375,165)(394,100)(415,35)
+
+        \bezier{700}(75,165)(245,100)(415,35)
+        \bezier{700}(375,165)(205,100)(35,35)
+    \end{picture}
+    \caption{ Метаграф с весами дуг +1, 0, 0, -1.. }
+    \label{image:3}
+\end{figure}
+
+\begin{theorem}[О начальных вершинах путей]
+    Пусть $\eta = (e_1, \dots, e_d)$ ~-- путь с начальной вершиной $v$ на метаграфе $G$, тогда на графе $G^{(r)}$ существуют $r$ попарно не пересекающихся путей $\mu_1 \dots \mu_r$ с начальными вершинами $v^{(1)}, ..., v^{(r)}$, таких что для каждого пути $\mu'=(e_1',\dots,e_d') \in\{\mu_1,\dots,\mu_r\}$ справедливо, что для всех $j\in[1;d]_N$ $e_{j}' \in T^{(r)}(e_j)$.
+\end{theorem}
+
+\begin{proof}
+    Доказательство этого утверждения практически дословно повторяет доказательство теоремы 1 в \cite{skorohodov_reachability_problem}.
+\end{proof}
+
+\begin{definition}
+    Будем говорить, что пути $\eta$ на метаграфе $G$ соответствуют пути $\mu_i$ на графе $G^{(r)}$ и наоборот.
+\end{definition}
+
+\begin{notice}
+    Из того, что некоторый путь на метаграфе $G$ является циклом не следует, что соответствующие ему пути на $G^{(r)}$ являются циклами. Рассмотрим эту ситуацию на следующем примере.
+\end{notice}
 
 \end{document}
