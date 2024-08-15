@@ -85,7 +85,9 @@ Consider weighted bipartite graphs that can be used to build larger graphs with 
     Consider $G(V,E,f)$ a bipartite graph. A quadriple $G'(V,E,f,w)$ is called a metagraph, where $w: E \to \mathbb{Z}$ is a function mapping edges to their weights.
 \end{definition}
 
- \ref{image:2} представлен метаграф  $G_1$ с тремя вершинами и четырьмя дугами.
+%%%
+
+Example\ref{image:2} shows metagraph  $G_1$ with three vertices and four edges.
 
 \begin{figure}[H]
     \centering
@@ -111,23 +113,23 @@ Consider weighted bipartite graphs that can be used to build larger graphs with 
         \bezier{300}(75,165)(94,100)(115,35)
         \put(87,80){$0$}
     \end{picture}
-    \caption{ Метаграф с весами дуг +1, 0, 0, -1.. }
+    \caption{ Metagraph with edge weights of +1, 0, 0, -1. }
     \label{image:2}
 \end{figure}
 
 \begin{definition}
-    Пусть $r \in \mathbb{N}$, тогда $r$-расширением метаграфа $G'(V,E,f,w)$ назовём граф $G^{(r)}(V^{(r)}, E^{(r)}, f^{(r)})$ построенный следующим образом: для каждой вершины $v \in V$ ставится в соответствие множество вершин $\{ v^{(1)}, ..., v^{(r)} \}$; для каждой дуги $e \in E$ ставится в соответствие множество дуг $\{ e^{(1)}, ..., e^{(r)} \}$, при этом если $f(e) = (a, b)$, тогда $f^{(r)}(e^{(i)}) = (a^{(i)}, b^{(i + w(e) (\mod{r}))})$ $\forall i = 1,...,r$.
+    Let $r \in \mathbb{N}$, a $r$-expansion of metagraph $G'(V,E,f,w)$ is a graph $G^{(r)}(V^{(r)}, E^{(r)}, f^{(r)})$ where each vertex $v \in V$ corresponds to the set of vertices $\{ v^{(1)}, ..., v^{(r)} \}$; each edge $e \in E$ corresponds to the set of edges $\{ e^{(1)}, ..., e^{(r)} \}$, and given $f(e) = (a, b)$, then $f^{(r)}(e^{(i)}) = (a^{(i)}, b^{(i + w(e) (\mod{r}))})$ $\forall i = 1,...,r$.
 \end{definition}
 
 \begin{notice}
-    Множества вершин и дуг расширения устроены следующим образом:
+    Sets of vertices and edges are constructed as follows:
     \[
         V^{(r)} = \bigcup_{v \in V} \{ v^{(1)}, ..., v^{(r)} \};\;\;\;
         E^{(r)} = \bigcup_{e \in E} \{ e^{(1)}, ..., e^{(r)} \}.
     \]
 \end{notice}
 
-На рисунке. \ref{image:3} изображён граф, полученный 4-расширением метаграфа $G_1$, изображённого на рисунке \ref{image:2}.
+Example \ref{image:3} shows graph, built as a 4-expansion of metagraph $G_1$, shown in example \ref{image:2}.
 
 \begin{figure}[H]
     \centering
@@ -183,24 +185,128 @@ Consider weighted bipartite graphs that can be used to build larger graphs with 
         \bezier{700}(75,165)(245,100)(415,35)
         \bezier{700}(375,165)(205,100)(35,35)
     \end{picture}
-    \caption{ Метаграф с весами дуг +1, 0, 0, -1.. }
+    \caption{ 4-expansion of metagraph. }
     \label{image:3}
 \end{figure}
 
-\begin{theorem}[О начальных вершинах путей]
-    Пусть $\eta = (e_1, \dots, e_d)$ ~-- путь с начальной вершиной $v$ на метаграфе $G$, тогда на графе $G^{(r)}$ существуют $r$ попарно не пересекающихся путей $\mu_1 \dots \mu_r$ с начальными вершинами $v^{(1)}, ..., v^{(r)}$, таких что для каждого пути $\mu'=(e_1',\dots,e_d') \in\{\mu_1,\dots,\mu_r\}$ справедливо, что для всех $j\in[1;d]_N$ $e_{j}' \in T^{(r)}(e_j)$.
+\begin{theorem}[About the first vertices of paths]
+    Let $\eta = (e_1, \dots, e_d)$ be a path with first vertex $v$ on metagraph $G$, then there are $r$ non-intersecting paths $\mu_1 \dots \mu_r$ in $G^{(r)}$, with starting vertices $v^{(1)}, ..., v^{(r)}$, such that for every path $\mu'=(e_1',\dots,e_d') \in\{\mu_1, \dots, \mu_r\}$,  \; $e_{j}' \in T^{(r)}(e_j)$ for every $j \in 1 \dots d$.
 \end{theorem}
 
 \begin{proof}
-    Доказательство этого утверждения практически дословно повторяет доказательство теоремы 1 в \cite{skorohodov_reachability_problem}.
+    The proof of this statement repeats the proof of theorem 1 in \cite{skorohodov_reachability_problem}.
 \end{proof}
 
 \begin{definition}
-    Будем говорить, что пути $\eta$ на метаграфе $G$ соответствуют пути $\mu_i$ на графе $G^{(r)}$ и наоборот.
+    Let us call paths $\mu_i$ on graph $G^{(r)}$ corresponding to path $\eta$ on metagraph $G$ and vice versa.
 \end{definition}
 
 \begin{notice}
-    Из того, что некоторый путь на метаграфе $G$ является циклом не следует, что соответствующие ему пути на $G^{(r)}$ являются циклами. Рассмотрим эту ситуацию на следующем примере.
+    If some path is a cycle on metagraph $G$ it's corresponding paths on $G^{(r)}$ might not be cycles. Such case is demonstrated in the following example. 
 \end{notice}
+
+\textbf{Example 1.}
+
+Consider graph on image \ref{metagraph_3_expansion}. Path $(e_1, e_2)$ is a cycle on metagraph, but none of it's corresponding paths  $\mu_1 = (e^{(1)}_1, e^{(1)}_2)$, $\mu_2 = (e^{(2)}_1, e^{(2)}_2)$, $\mu_3 = (e^{(3)}_1, e^{(3)}_2)$  on 3-expansion is a cycle. Notice that concatenation of these three paths $\mu = (e^{(1)}_1, e^{(1)}_2, e^{(2)}_1, e^{(2)}_2, e^{(3)}_1, e^{(3)}_2)$ is a cycle with length 6. Cycle $\mu$ corresponds to cycle $(e_1, e_2, e_1, e_2, e_1, e_2)$ on metagraph.
+
+\begin{figure}[H]
+    \centering
+    \begin{picture}(255,200)
+        \put(0,165){$a.$}
+
+        \put(35,165){\thicklines{\circle*{5}}}
+        \put(30,170){$A$}
+        \put(35,35){\thicklines{\circle*{5}}}
+        \put(30,20){$B$}
+    
+        \bezier{300}(35,165)(10,100)(35,35)
+        \put(0,100){$e_1$}
+        \bezier{300}(35,165)(60,100)(35,35)
+        \put(56,100){$e_ 2$}
+
+        \put(110,165){$b.$}
+
+        \put(145,165){\thicklines{\circle*{5}}}
+        \put(140,170){$A^{(1)}$}
+        \put(145,35){\thicklines{\circle*{5}}}
+        \put(140,20){$B^{(1)}$}
+
+        \thicklines
+        \bezier{300}(145,165)(145,100)(145,35)
+        \put(125,130){$e_0^{(1)}$}
+
+        \bezier{300}(145,165)(165,100)(185,35)
+        \put(147,85){$e_1^{(1)}$}
+        \thinlines
+
+        \put(185,165){\thicklines{\circle*{5}}}
+        \put(180,170){$A^{(2)}$}
+        \put(185,35){\thicklines{\circle*{5}}}
+        \put(180,20){$B^{(2)}$}
+
+        \bezier{300}(185,165)(185,100)(185,35)
+        \put(165,130){$e_0^{(2)}$}
+        
+        \bezier{300}(185,165)(205,100)(225,35)
+        \put(187,85){$e_1^{(2)}$}
+
+        \put(225,165){\thicklines{\circle*{5}}}
+        \put(220,170){$A^{(3)}$}
+        \put(225,35){\thicklines{\circle*{5}}}
+        \put(220,20){$B^{(3)}$}
+
+        \bezier{300}(225,165)(225,100)(225,35)
+        \put(205,130){$e_0^{(3)}$}
+
+        \bezier{300}(225,165)(232,50)(145,35)
+        \put(190,45){$e_1^{(3)}$}
+    \end{picture}
+    \caption{ a. Metagraph. b. 3-expansion of metagraph. }
+    \label{metagraph_3_expansion}
+\end{figure}
+
+\begin{definition}
+    Let $G(V, E, f, w)$ be a metagraph, $\eta = (e_1, ..., e_d)$ is a path on $G$.
+
+    Characteristic of $\eta$ is
+    \[
+        \chi(\eta) = \sum_{i = 1}^d \chi_{\eta}(e_i) w(e_i).
+    \]
+\end{definition}
+
+Clearly, the following statement is true
+
+\begin{theorem} \label{glued_paths}
+    Let $G$ be a metagraph, $\mu = (e_1, \dots, e_d)$ and $\eta = (u_1, \dots, u_k)$ be paths on $G$ and let $\xi = (e_1, \dots, e_d, u_1, \dots, u_k)$ also be a path on $G$; let $\mu' = (e_d, \dots, e_1)$ be an inversion of $\mu$. Thus the following relations are true:
+
+    1. $ \chi(\xi) = \chi(\mu) + \chi(\eta)$,
+
+    2. $ \chi(\mu') = -\chi(\mu)$.
+\end{theorem}
+
+\begin{theorem}[About the last vertices of paths]
+    Let $\eta = (e_1, ..., e_d)$ be a path on metagraph $G$, it's first vertex is $x$, it's last vertex is $y$. Let $\mu' = (e'_1, ..., e'_d)$ be on of it's corresponding paths on $G^{(r)}$, it's first vertex is $x^{(i)}$.
+    
+    Then the last vertex of $\mu'$ is $y^{(i + \chi(\eta) (\mod{r}))}$.
+    
+\end{theorem}
+    
+\begin{proof}
+    Доказательство проведём по индукции по длине пути $|\eta| = d$.
+    
+    Пусть $d = 1$, тогда путь состоит их одной дуги $e_1$.
+    
+    Если $x \in A$, тогда вершина $x^{(i)}$ инцидентна дуге $e_1'$, для которой $f^{(r)}(e_1') = (x^{(i)}, y^{(i + w(e_1) (\mod{r}))})$ то есть, конечной вершиной пути $\mu_i$ является $y^{(i + w(e_1) (\mod{r}))} = y^{(i + \chi(\eta) (\mod{r}))}$.
+    
+    Если $x \in B$, тогда вершина $x^{(i)}$ инцидентна дуге $e_1'$, для которой $f^{(r)}(e_1') = (y^{(i - w(e_1) (\mod{r}))}, x^{(i)})$ то есть, конечной вершиной пути $\mu_i$ является $y^{(i - w(e_1) (\mod{r}))} = y^{(i + \chi(\eta) (\mod{r}))}$.
+    
+    Пусть условия теоремы выполняются для всякого $d < n$, тогда рассмотрим случай $d = n$.
+    
+    Рассмотрим путь $\eta' = (e_1, ..., e_{d - 1})$. Обозначим его последнюю вершину $x$. Тогда по предположению индукции последние вершины соответствующих ему путей на метаграфе ~-- это $x^{(i + \chi(\eta')(\mod{r}))}$.
+    
+    Если $x \in A$, тогда вершина $x^{(i + \chi(\eta')(\mod{r}))}$ инцидентна дуге \\ $f^{(r)}(e_d^{(i + \chi(\eta')(\mod{r}))}) = (x^{(i + \chi(\eta')(\mod{r}))}, y^{(i + \chi(\eta') + w(e_d) (\mod{r}))})$ и конечная \\ вершина пути $\mu_i$ ~-- $y^{(i + \chi(\eta') + w(e_d) (\mod{r}))} = y^{(i + \chi(\mu) (\mod{r}))}$.
+    
+    Если $x \in B$, тогда вершина $x^{(i + \chi(\eta')(\mod{r}))}$ инцидентна дуге \\ $f^{(r)}(e_d^{(i + \chi(\eta') - w(e_d) (\mod{r}))}) = (y^{(i + \chi(\eta') - w(e_d) (\mod{r}))}, x^{(i)})$ и конечная вершина пути $\mu_i$ ~-- $y^{(i + \chi(\eta') - w(e_d) (\mod{r}))} = y^{(i + \chi(\mu) (\mod{r}))}$.    
+\end{proof}
 
 \end{document}
