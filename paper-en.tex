@@ -1,5 +1,5 @@
 \documentclass[14pt]{mmcs-article}
-\usepackage[russian]{babel}
+% \usepackage[russian]{babel}
 \usepackage{amsmath, amsthm, amsfonts, amssymb}
 \usepackage{listings, listings-rust}
 
@@ -26,7 +26,7 @@
 
 \section{Main definitions}
 
-Let us give main definitions that are used onwards. We will use the definition of a bipartite graph based on a definition 7.1 given in a book <<Дискретная Математика>> Я.М. Ерусалимского % Сослаться на книжку Татта (Tutte) 
+Let us give main definitions that are used onwards. We will use the definition of a bipartite graph based on a definition 7.1 given in a book % <<Дискретная Математика>> Я.М. Ерусалимского % Сослаться на книжку Татта (Tutte) 
 
 \begin{definition}
     A bipartite graph is a triple $G(V, E, f)$
@@ -85,9 +85,7 @@ Consider weighted bipartite graphs that can be used to build larger graphs with 
     Consider $G(V,E,f)$ a bipartite graph. A quadriple $G'(V,E,f,w)$ is called a metagraph, where $w: E \to \mathbb{Z}$ is a function mapping edges to their weights.
 \end{definition}
 
-%%%
-
-Example\ref{image:2} shows metagraph  $G_1$ with three vertices and four edges.
+Example \ref{image:2} shows metagraph  $G_1$ with three vertices and four edges.
 
 \begin{figure}[H]
     \centering
@@ -113,19 +111,19 @@ Example\ref{image:2} shows metagraph  $G_1$ with three vertices and four edges.
         \bezier{300}(75,165)(94,100)(115,35)
         \put(87,80){$0$}
     \end{picture}
-    \caption{ Metagraph with edge weights of +1, 0, 0, -1. }
+    \caption{ Metagraph with edges weights of +1, 0, 0, -1. }
     \label{image:2}
 \end{figure}
 
 \begin{definition}
-    Let $r \in \mathbb{N}$, a $r$-expansion of metagraph $G'(V,E,f,w)$ is a graph $G^{(r)}(V^{(r)}, E^{(r)}, f^{(r)})$ where each vertex $v \in V$ corresponds to the set of vertices $\{ v^{(1)}, ..., v^{(r)} \}$; each edge $e \in E$ corresponds to the set of edges $\{ e^{(1)}, ..., e^{(r)} \}$, and given $f(e) = (a, b)$, then $f^{(r)}(e^{(i)}) = (a^{(i)}, b^{(i + w(e) (\mod{r}))})$ $\forall i = 1,...,r$.
+    Let $r \in \mathbb{N}$, an $r$-expansion of metagraph $G(V,E,f,w)$ is a graph $G^{(r)}(V^{(r)}, E^{(r)}, f^{(r)})$, such that each vertex $v \in V$ corresponds to the set of vertices $ T^{(r)}(v) = \{ v^{(1)}, \dots, v^{(r)} \}$; each edge $e \in E$ corresponds to the set of edges $ T^{(r)}(e) =  \{ e^{(1)}, \dots, e^{(r)} \}$; and the incidence function is built according to the following rule: for each $e \in E$ such that $f(e) = (a, b)$, then $f^{(r)}(e^{(i)}) = (a^{(i)}, b^{(i + w(e) (\mod{r}))})$ $\forall i = 1, \dots, r$.
 \end{definition}
 
 \begin{notice}
     Sets of vertices and edges are constructed as follows:
     \[
-        V^{(r)} = \bigcup_{v \in V} \{ v^{(1)}, ..., v^{(r)} \};\;\;\;
-        E^{(r)} = \bigcup_{e \in E} \{ e^{(1)}, ..., e^{(r)} \}.
+        V^{(r)} = \bigcup_{v \in V} T^{(r)}(v);\;\;\;
+        E^{(r)} = \bigcup_{e \in E} T^{(r)}(e).
     \]
 \end{notice}
 
@@ -185,12 +183,12 @@ Example \ref{image:3} shows graph, built as a 4-expansion of metagraph $G_1$, sh
         \bezier{700}(75,165)(245,100)(415,35)
         \bezier{700}(375,165)(205,100)(35,35)
     \end{picture}
-    \caption{ 4-expansion of metagraph. }
+    \caption{ 4-expansion of metagraph $G_1$. }
     \label{image:3}
 \end{figure}
 
-\begin{theorem}[About the first vertices of paths]
-    Let $\eta = (e_1, \dots, e_d)$ be a path with first vertex $v$ on metagraph $G$, then there are $r$ non-intersecting paths $\mu_1 \dots \mu_r$ in $G^{(r)}$, with starting vertices $v^{(1)}, ..., v^{(r)}$, such that for every path $\mu'=(e_1',\dots,e_d') \in\{\mu_1, \dots, \mu_r\}$,  \; $e_{j}' \in T^{(r)}(e_j)$ for every $j \in 1 \dots d$.
+\begin{theorem}[on first vertices of paths]
+    Let $\eta = (e_1, \dots, e_d)$ be a path with first vertex $v$ on metagraph $G$, then there are $r$ non-intersecting paths $\mu_1, \dots, \mu_r$ in $G^{(r)}$, with starting vertices $v^{(1)}, \dots, v^{(r)}$, such that for every path $\mu'=(e_1', \dots, e_d') \in\{\mu_1, \dots, \mu_r\}$,  \; $e_{j}' \in T^{(r)}(e_j)$ for every $j \in 1 \dots d$.
 \end{theorem}
 
 \begin{proof}
@@ -198,16 +196,16 @@ Example \ref{image:3} shows graph, built as a 4-expansion of metagraph $G_1$, sh
 \end{proof}
 
 \begin{definition}
-    Let us call paths $\mu_i$ on graph $G^{(r)}$ corresponding to path $\eta$ on metagraph $G$ and vice versa.
+    Paths $\mu_i$ on graph $G^{(r)}$ are said to be corresponding to path $\eta$ on metagraph $G$ and vice versa.
 \end{definition}
 
 \begin{notice}
-    If some path is a cycle on metagraph $G$ it's corresponding paths on $G^{(r)}$ might not be cycles. Such case is demonstrated in the following example. 
+    If some path is a cycle on metagraph $G$, then it's corresponding paths on $G^{(r)}$ might not be cycles. Such a case is demonstrated by the following example.
 \end{notice}
 
 \textbf{Example 1.}
 
-Consider graph on image \ref{metagraph_3_expansion}. Path $(e_1, e_2)$ is a cycle on metagraph, but none of it's corresponding paths  $\mu_1 = (e^{(1)}_1, e^{(1)}_2)$, $\mu_2 = (e^{(2)}_1, e^{(2)}_2)$, $\mu_3 = (e^{(3)}_1, e^{(3)}_2)$  on 3-expansion is a cycle. Notice that concatenation of these three paths $\mu = (e^{(1)}_1, e^{(1)}_2, e^{(2)}_1, e^{(2)}_2, e^{(3)}_1, e^{(3)}_2)$ is a cycle with length 6. Cycle $\mu$ corresponds to cycle $(e_1, e_2, e_1, e_2, e_1, e_2)$ on metagraph.
+Consider graph on figure \ref{metagraph_3_expansion}. Path $(e_1, e_2)$ is a cycle on metagraph, but none of it's corresponding paths  $\mu_1 = (e^{(1)}_1, e^{(1)}_2)$, $\mu_2 = (e^{(2)}_1, e^{(2)}_2)$, $\mu_3 = (e^{(3)}_1, e^{(3)}_2)$  on 3-expansion is a cycle. Notice that concatenation of these three paths $\mu = (e^{(1)}_1, e^{(1)}_2, e^{(2)}_1, e^{(2)}_2, e^{(3)}_1, e^{(3)}_2)$ is a cycle with length 6. Cycle $\mu$ corresponds to cycle $(e_1, e_2, e_1, e_2, e_1, e_2)$ on metagraph.
 
 \begin{figure}[H]
     \centering
@@ -266,7 +264,7 @@ Consider graph on image \ref{metagraph_3_expansion}. Path $(e_1, e_2)$ is a cycl
 \end{figure}
 
 \begin{definition}
-    Let $G(V, E, f, w)$ be a metagraph, $\eta = (e_1, ..., e_d)$ is a path on $G$.
+    Let $G(V, E, f, w)$ be a metagraph, $\eta = (e_1, ..., e_d)$ be a path on $G$.
 
     Characteristic of $\eta$ is
     \[
@@ -274,39 +272,55 @@ Consider graph on image \ref{metagraph_3_expansion}. Path $(e_1, e_2)$ is a cycl
     \]
 \end{definition}
 
-Clearly, the following statement is true
+It is clear that the following theorem holds.
 
 \begin{theorem} \label{glued_paths}
-    Let $G$ be a metagraph, $\mu = (e_1, \dots, e_d)$ and $\eta = (u_1, \dots, u_k)$ be paths on $G$ and let $\xi = (e_1, \dots, e_d, u_1, \dots, u_k)$ also be a path on $G$; let $\mu' = (e_d, \dots, e_1)$ be an inversion of $\mu$. Thus the following relations are true:
+    Let $G$ be a metagraph, $\mu = (e_1, \dots, e_d)$ and $\eta = (u_1, \dots, u_k)$ be paths on $G$ and let $\xi = (e_1, \dots, e_d, u_1, \dots, u_k)$ also be a path on $G$; let $\mu' = (e_d, \dots, e_1)$ be an inversion path of $\mu$. Then the following relations are true:
 
     1. $ \chi(\xi) = \chi(\mu) + \chi(\eta)$,
 
     2. $ \chi(\mu') = -\chi(\mu)$.
 \end{theorem}
 
-\begin{theorem}[About the last vertices of paths]
-    Let $\eta = (e_1, ..., e_d)$ be a path on metagraph $G$, it's first vertex is $x$, it's last vertex is $y$. Let $\mu' = (e'_1, ..., e'_d)$ be on of it's corresponding paths on $G^{(r)}$, it's first vertex is $x^{(i)}$.
+\begin{theorem}[on last vertices of paths]\label{theorem_last_vertices}
+    Let $\eta = (e_1, ..., e_d)$ be a path on metagraph $G$ with first vertex $x$ and last vertex $y$. Let $\mu' = (e'_1, ..., e'_d)$ be one of it's corresponding paths on $G^{(r)}$ with first vertex $x^{(i)}$.
     
     Then the last vertex of $\mu'$ is $y^{(i + \chi(\eta) (\mod{r}))}$.
     
 \end{theorem}
     
 \begin{proof}
-    Доказательство проведём по индукции по длине пути $|\eta| = d$.
+    % Посмотреть, как по книжке Сосинского правильно описывать индукцию
+    Conduct the proof by method of mathematical induction on the length of the path $|\eta| = d$.
     
-    Пусть $d = 1$, тогда путь состоит их одной дуги $e_1$.
+    \begin{enumerate}
+    \item $d = 1$, i.e. the path $\eta$ consist of only one edge $x$.
     
-    Если $x \in A$, тогда вершина $x^{(i)}$ инцидентна дуге $e_1'$, для которой $f^{(r)}(e_1') = (x^{(i)}, y^{(i + w(e_1) (\mod{r}))})$ то есть, конечной вершиной пути $\mu_i$ является $y^{(i + w(e_1) (\mod{r}))} = y^{(i + \chi(\eta) (\mod{r}))}$.
+    If $x \in A$, then vertex $x^{(i)}$ is incident to the edge $e_1'$, for which $f^{(r)}(e_1') = (x^{(i)}, y^{(i + w(e_1) (\mod{r}))})$ hence the last vertex of the path $\mu_i$ is $y^{(i + w(e_1) (\mod{r}))} = y^{(i + \chi(\eta) (\mod{r}))}$.
     
-    Если $x \in B$, тогда вершина $x^{(i)}$ инцидентна дуге $e_1'$, для которой $f^{(r)}(e_1') = (y^{(i - w(e_1) (\mod{r}))}, x^{(i)})$ то есть, конечной вершиной пути $\mu_i$ является $y^{(i - w(e_1) (\mod{r}))} = y^{(i + \chi(\eta) (\mod{r}))}$.
+    If $x \in B$, then vertex $x^{(i)}$ is incident to the edge $e_1'$, for which $f^{(r)}(e_1') = (y^{(i - w(e_1) (\mod{r}))}, x^{(i)})$ hence the last vertex of the path $\mu_i$ is $y^{(i - w(e_1) (\mod{r}))} = y^{(i + \chi(\eta) (\mod{r}))}$.
     
-    Пусть условия теоремы выполняются для всякого $d < n$, тогда рассмотрим случай $d = n$.
+    \item Let for any $d \leq n$ the statement under the proof holds. We prove that it holds for $d = n + 1$.
+
+    Suppose $\eta' = (e_1, ..., e_{d - 1})$ is a path. Let us call $x$ the last vertex of path $\eta$. According to the supposition of induction the last vertices of it's corresponding paths on extension are $x^{(i + \chi(\eta')(\mod{r}))}$.
     
-    Рассмотрим путь $\eta' = (e_1, ..., e_{d - 1})$. Обозначим его последнюю вершину $x$. Тогда по предположению индукции последние вершины соответствующих ему путей на метаграфе ~-- это $x^{(i + \chi(\eta')(\mod{r}))}$.
+    If $x \in A$, then vertex $x^{(i + \chi(\eta')(\mod{r}))}$ is incident to the edge $f^{(r)}(e_d^{(i + \chi(\eta')(\mod{r}))}) = (x^{(i + \chi(\eta')(\mod{r}))}, y^{(i + \chi(\eta') + w(e_d) (\mod{r}))})$ hence the last vertex of the path $\mu_i$ is $y^{(i + \chi(\eta') + w(e_d) (\mod{r}))} = y^{(i + \chi(\mu) (\mod{r}))}$.
     
-    Если $x \in A$, тогда вершина $x^{(i + \chi(\eta')(\mod{r}))}$ инцидентна дуге \\ $f^{(r)}(e_d^{(i + \chi(\eta')(\mod{r}))}) = (x^{(i + \chi(\eta')(\mod{r}))}, y^{(i + \chi(\eta') + w(e_d) (\mod{r}))})$ и конечная \\ вершина пути $\mu_i$ ~-- $y^{(i + \chi(\eta') + w(e_d) (\mod{r}))} = y^{(i + \chi(\mu) (\mod{r}))}$.
+    If $x \in B$, then vertex $x^{(i + \chi(\eta')(\mod{r}))}$ is incident to the edge $f^{(r)}(e_d^{(i + \chi(\eta') - w(e_d) (\mod{r}))}) = (y^{(i + \chi(\eta') - w(e_d) (\mod{r}))}, x^{(i)})$ hence the last vertex of the path $\mu_i$ is $y^{(i + \chi(\eta') - w(e_d) (\mod{r}))} = y^{(i + \chi(\mu) (\mod{r}))}$.  
     
-    Если $x \in B$, тогда вершина $x^{(i + \chi(\eta')(\mod{r}))}$ инцидентна дуге \\ $f^{(r)}(e_d^{(i + \chi(\eta') - w(e_d) (\mod{r}))}) = (y^{(i + \chi(\eta') - w(e_d) (\mod{r}))}, x^{(i)})$ и конечная вершина пути $\mu_i$ ~-- $y^{(i + \chi(\eta') - w(e_d) (\mod{r}))} = y^{(i + \chi(\mu) (\mod{r}))}$.    
+    \end{enumerate}  
 \end{proof}
+
+Theorems \ref{theorem_cycles} and \ref{theorem_wings} are direct corollaries of theorem \ref{theorem_last_vertices}.
+
+\begin{theorem}[on cycles]\label{theorem_cycles}
+    Let $\eta$ be a cycle on metagaph. Then it's corresponding paths on the extension are cycles iff $\chi(\eta) = 0 (\mod{r})$.
+\end{theorem}
+
+\begin{theorem}[on wings of cycles]\label{theorem_wings}
+    Let $\eta = (e_1, ..., e_d)$ and $\mu = (\epsilon_1, ..., \epsilon_{\delta})$ be different paths on metagraph $G$, with first vertex $a$, and last vertex $b$, $\chi(\eta) = \chi(\mu) (\mod{r})$, and let $\gamma = (e_1, \dots, e_d, \epsilon_{\delta}, \dots, \epsilon_1)$ be a path on $G$. Then paths on extension which correspond to $\gamma$, are cycles.
+\end{theorem}
+
+%%% ^^^^^^^^^^
 
 \end{document}
