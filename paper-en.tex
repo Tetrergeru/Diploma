@@ -1,5 +1,5 @@
 \documentclass[14pt]{mmcs-article}
-% \usepackage[russian]{babel}
+\usepackage[russian]{babel}
 \usepackage{amsmath, amsthm, amsfonts, amssymb}
 \usepackage{listings, listings-rust}
 
@@ -321,6 +321,133 @@ Theorems \ref{theorem_cycles} and \ref{theorem_wings} are direct corollaries of 
     Let $\eta = (e_1, ..., e_d)$ and $\mu = (\epsilon_1, ..., \epsilon_{\delta})$ be different paths on metagraph $G$, with first vertex $a$, and last vertex $b$, $\chi(\eta) = \chi(\mu) (\mod{r})$, and let $\gamma = (e_1, \dots, e_d, \epsilon_{\delta}, \dots, \epsilon_1)$ be a path on $G$. Then paths on extension which correspond to $\gamma$, are cycles.
 \end{theorem}
 
+\section{On graphs with given girth.}
+
+% help us __to__ build?
+
+Let $G(V, E, f, w)$ be a metagraph and $w(e_i) = x_i \; \forall i = 0, \dots, |E|$, where $x_i$ are variables that will help us build a graph with given girth.
+
+% Поискать, как в англоязычной литературе называют не равенства с \neq
+
+Since we have to build an extension graph $G'$ with girth $g$, therefore for any cycle $\eta$ with length less than $g$ on metagraph $G$, assume inequality of the form $\chi(\eta) \neq 0$.
+
+\begin{theorem}
+
+Let $G$ be a metagraph. Then there exists an extension of metagraph $G$ with girth equal to or greater than $g$ iff the following system of inequalities for a graph $G$ has a solution:
+
+\begin{equation}
+    \centering
+    \left\{
+        \begin{array}{ll}
+            \chi(\eta) &\neq 0 \; \forall \, \eta \in \mathcal{H}(g).
+        \end{array}
+    \right.,
+    \label{eqs:example}
+\end{equation}
+where $\mathcal{H}(g)$ is the set of all cycles on $G$ with length less then $g$.
+
+\end{theorem}
+
+\begin{proof}
+    % exhausts?
+    The construction of system (1) exhausts all cycles, hence the absence of a solution is equivalent to existence of a cycle with length less then $g$ on any extension. Thus the existence of a solution for system (1) is equivalent to existence of an extension with girth greater than $g$.
+\end{proof}
+
 %%% ^^^^^^^^^^
+
+To construct a system \ref{eqs:example} for a given metagraph $G$ the following algorithm can be used.
+
+\textbf{Algorithm 1.}
+
+Let $G(A \cup B, E, f, w)$ be a metagraph and let $w(e_i) = x_i \; \forall i = 0..|E|$.
+
+Algorithm is based on the construction of a set of labels.
+Each label is a quadruple $(g, v, ch, p)$,
+where $g$ is a length of the path $\mu$ from starting vertex to the vertex marked with this label, let us call $g$ generation of the label; 
+$v$ is a vertex marked by this label;
+$ch \in \mathbb{Z}$ characteristic of the path $\mu$, let us call $ch$ characteristic of the label;
+$p \in V \cup \{ nil \}$ is an edge that was used the generate this label, $nil \not\in V $ is a special values reserved for a starting label.
+
+For each vertex $a \in A$:
+
+\begin{itemize}
+    \item Add starting label $(0, a, 0, nil)$ to an empty set of all labels,
+    \item Iterating by generations $g$ from $1$ to $l / 2$:
+    \begin{itemize}
+        \item For all labels $(g - 1, v, ch, p)$:
+        \item
+            For each edge $e \not= p$ incident to vertex $v$,
+            construct label $(g, v', ch', e)$, where $ch' = ch + (-1)^{g} w(e)$, $v'$ is a vertex different from $v$, incident to $e$.
+            Add this label to the set of all labels.
+    \end{itemize}
+    \item Add all inequalities $ch_1 \neq \ch_2$ for all pairs of labels with equal vertices and generations to the set of inequalities.
+\end{itemize}
+
+\begin{notice}
+    In algorithm 1 we consider cycles consisting of two path of equal length i.e. only cycles with two "wings" of equal length. All cycles on bipartite graph can be represented this way, thus all cycles will be found.
+\end{notice}
+
+\textbf{Example.}
+
+On image \ref{neq_system_graph} the metagraph $G$ with for edges $e_1, e_2, e_3, e_4$ is depicted. Weights of edges are variables $x_1, x_2, x_3, x_4$.
+
+Let us execute algorithm 2 for metargaph $G$ and target girth of 6. The set of labels, constructed during the execution of the algorithm is depicted on the table \ref{cycle_search_table_neq}. From these labels the system of inequalities (2) is constructed, it's solution gives us the weights that allow us to build an r-extension with the girth of 6.
+
+\begin{figure}[H]
+    \centering
+    \begin{picture}(150,200)
+        \put(75,165){\thicklines{\circle*{5}}}
+        \put(70,170){$v_1$}
+    
+        \put(35,35){\thicklines{\circle*{5}}}
+        \put(30,20){$v_2$}
+    
+        \put(115,35){\thicklines{\circle*{5}}}
+        \put(110,20){$v_3$}
+    
+        \bezier{300}(75,165)(10,100)(35,35)
+        \put(5,100){$x_1$}
+
+        \bezier{300}(75,165)(56,100)(35,35)
+        \put(56,80){$x_2$}
+    
+        \bezier{300}(75,165)(140,100)(115,35)
+        \put(125,100){$x_3$}
+
+        \bezier{300}(75,165)(94,100)(115,35)
+        \put(87,80){$x_4$}
+    \end{picture}
+    \caption{ Metagraph $G$, with variable weights of edges $x_1, x_2, x_3, x_4$. }
+    \label{neq_system_graph}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ | c | c | c | }
+        \hline
+        $g = 0$            & $g = 1$               & $g = 2$                   \\ \hline
+        $(0, v_1, 0, nil)$ & $(1, v_2,  x_1, e_1)$ & $(2, v_1,  x_1 - x_2, b)$ \\ \hline
+                           & $(1, v_2,  x_2, e_2)$ & $(2, v_1,  x_2 - x_1, a)$ \\ \hline
+                           & $(1, v_3,  x_3, e_3)$ & $(2, v_1,  x_3 - x_4, e)$ \\ \hline
+                           & $(1, v_3,  x_4, e_4)$ & $(2, v_1,  x_4 - x_3, d)$ \\ \hline
+    \end{tabular}
+    \caption{ The set of labels constructed during the execution of the algorithm 1. }
+    \label{cycle_search_table_neq}
+\end{table}
+
+\begin{equation}
+    \centering
+    \left\{
+        \begin{array}{ll}
+            x_1 - x_2 &\neq 0             ; \\
+            x_3 - x_4 &\neq 0             ; \\
+            2 x_1 - 2 x_2 &\neq 0         ; \\
+            2 x_3 - 2 x_4 &\neq 0         ; \\
+            x_1 - x_2 - x_3 + x_4 &\neq 0 ; \\
+            x_1 - x_2 + x_3 - x_4 &\neq 0 . \\
+        \end{array}
+        \label{eqs:cycle_search_neqs}
+    \right.
+\end{equation}
 
 \end{document}
