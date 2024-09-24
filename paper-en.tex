@@ -353,8 +353,6 @@ where $\mathcal{H}_G(g)$ is the set of all cycles on $G$ with length less then $
     The construction of system (1) exhausts all cycles, hence the absence of a solution is equivalent to existence of a cycle with length less then $g$ on any expansion. Thus the existence of a solution for system (1) is equivalent to existence of an expansion with girth greater than $g$.
 \end{proof}
 
-%%% ^^^^^^^^^^
-
 % Добавить везде где надо (\mod{r})
 
 For a given metagraph $G$, system \eqref{eqs:example} can be built using the following algorithm.
@@ -464,21 +462,22 @@ Let us apply Algorithm 1 for metagraph $G$ and girth to be 6. The set of labels,
 
 Finding of the minimal solution for system \eqref{eqs:example}, is a computationally hard problem. It requires to enumerate all possible solutions and select the minimal one. Still, if system \eqref{eqs:example} has a solution then one of them can be found by the following algorithm.
 
+%%% ^^^^^^^^^^
+
 \textbf{Algorithm 2.}
 
 \begin{enumerate}
     \item Let $e$ be the number of variables in a system of inequalities.
     \item If the system contains inequality $0 \neq 0$ then it has no solution, the algorithm halts.
     \item Let us pick all inequalities of the form $a x_e + b \neq 0$. Let $I$ be the set of all such inequalities.
-    \item Let $v$ be a number such that $v \neq -b/a \forall a x_e + b \in I$, if $I = \varnothing$, then let $v = 0$. Такое число можно найти, так как не равенств конечное количество. В результате этой замены не возникнет не равенства вида $0 \neq 0$ по условию выбора $v$.
-    \item Заменим во всех не равенствах $x_e$ на $v$ и добавим в решение элемент $x_e = v$.
-    \item Если $e = 1$ ~-- завершим работу алгоритма.
-    \item Положим $e = e - 1$ переменной и вернёмся на шаг 3.
+    \item Let $v$ be a number such that $v \neq -b/a \forall a x_e + b \in I$, if $I = \varnothing$, then let $v = 0$. Such a number can be found because there is a finite amount of inequalities.
+    \item Substitute variable $x_e$ with value $v$ in all inequalities and add identity $x_e = v$ to solution. By $v$ selection conditions, none of inequalities will turn into $0 \neq 0$ by such a substitution. 
+    \item If $e = 1$ the algorithm halts, otherwise let $e = e - 1$ and return to step 3.
 \end{enumerate}
 
 \textbf{Пример.}
 
-Положим $x_1 = 0$, подставим в систему не равенств, получим:
+Let $x_1$ be $0$, substitute it in a system of inequalities.
 
 \begin{equation}
     \centering
@@ -492,10 +491,10 @@ Finding of the minimal solution for system \eqref{eqs:example}, is a computation
             - x_2 + x_3 - x_4 &\neq 0. \\
         \end{array}
     \right..
-    \label{eqs:cycle_search_neqs}
+    \label{eqs:cycle_search_neqs_1}
 \end{equation}
 
-Значение $x_2$ не может быть равно $0$, т.к. в таком случае нарушается не равенство $- x_2 \neq 0$. Положим $x_2 = 1$, подставим в систему не равенств, получим:
+Variable $x_2$ can not be equal to $0$, because it violates inequality $- x_2 \neq 0$. Let $x_2$ be $1$, substitute it in a system of inequalities.
 
 \begin{equation}
     \centering
@@ -509,10 +508,10 @@ Finding of the minimal solution for system \eqref{eqs:example}, is a computation
             - 1 + x_3 - x_4 &\neq 0 . \\
         \end{array}
     \right..
-    \label{eqs:cycle_search_neqs}
+    \label{eqs:cycle_search_neqs_2}
 \end{equation}
 
-Положим $x_3 = 0$, подставим в систему не равенств, получим:
+Let $x_3$ be $0$, substitute it in a system of inequalities.
 
 \begin{equation}
     \centering
@@ -526,10 +525,10 @@ Finding of the minimal solution for system \eqref{eqs:example}, is a computation
             - 1 - x_4 &\neq 0 . \\
         \end{array}
     \right..
-    \label{eqs:cycle_search_neqs}
+    \label{eqs:cycle_search_neqs_3}
 \end{equation}
 
-Значение $x_4$ не может принимать значения $0, 1, -1$, т.к. в таком случае нарушаются не равенства. Положим $x_4 = 2$, подставим в систему не равенств, получим:
+Variable $x_4$ can not be equal to $0, 1, -1$, because it violates inequalities. Let $x_4$ be $2$, substitute it in a system of inequalities:
 
 \begin{equation}
     \centering
@@ -539,14 +538,14 @@ Finding of the minimal solution for system \eqref{eqs:example}, is a computation
             - 2 &\neq 0   ; \\
             - 2 &\neq 0   ; \\
             - 4 &\neq 0   ; \\
-            1 &\neq 0     ; \\
+              1 &\neq 0   ; \\
             - 3 &\neq 0   . \\
         \end{array}
     \right..
-    \label{eqs:cycle_search_neqs}
+    \label{eqs:cycle_search_neqs_4}
 \end{equation}
 
-Полученные не равенства показывают, что $r$ не может принимать значения $1, 2, 3, 4$, следовательно минимально допустимое значение $r$ ~-- $5$. 5-расширение метаграфа с весами, полученными в ходе решения системы не равенств, изображено на рисунке \ref{neq_system_res}. Заметим, что действительно обхват этого графа равен 6, один из циклов-шестёрок выделен жирным.
+Given inequalities do not allow $r$ to be $1, 2, 3, 4$, thus the least possible value of $r$ is $5$. 5-expansion of metagraph with weights, obtained as a solution to system (1), is shown in figure \ref{neq_system_res}. Girth of this graph is equal to $6$, and one of the cyc;es with length $6$ is marked in bold.
 
 \begin{figure}[H]
     \centering
@@ -599,12 +598,121 @@ Finding of the minimal solution for system \eqref{eqs:example}, is a computation
         \bezier{300}(190,165)(197,100)(205,35)
         \bezier{300}(50,165)(127,100)(205,35)
     \end{picture}
-    \caption{ Расширение метаграфа с весами дуг, полученными решением системы не равенств. }
+    \caption{ Expansion of a metagraph with weights obtained as a solution of a system of inequalities. }
     \label{neq_system_res}
 \end{figure}
 
 \begin{notice}
-    Результатом работы алгоритма поиска решения системы не равенств не обязательно будет минимальное решение.
+    The solution obtained as a result of Algorithm 2 might not give the minimal number of vertices after expansion. 
 \end{notice}
+
+\section{On selection of structure of metagraphs}
+
+In previous section we showed a method of finding weights, that allow us build metagraph expansions with given girth.
+But we have not suggested a way to select a structure of a metagraph such that it would be possible to find such weights, i.e. such that system (1) built by Algorithm 1 is non-contradicting.
+
+\begin{definition}
+    Let $G$ be a metagraph with variable weights. The girth of $G$ is the maximum among all girths of r-extensions of $G$.
+\end{definition}
+
+\begin{notice}
+    Let us sequentially apply Algorithm 1 to $G$ with target girths of $4, 6, \dots, 2n$, where $2n$ is the first number for which algorithm couldn't build a solution. Then girth of metagraph $G$ is $2n - 2$.
+\end{notice}
+
+Let us consider metagraphs that are complete bipartite graphs.
+
+\begin{definition}
+    Let $G(V,E,f)$ be a bipartite graph, let $A$ and $B$ be it's parts. $G$ is complete iff for each pair of vertices $a \in A, b \in B$ exists an edge $e$, such that $f(e) = (a, b)$.
+\end{definition}
+
+Example of complete bipartite graph is shown in figure \ref{full_graph_3_by_9}. 
+
+\begin{figure}[H]
+    \centering
+    \begin{picture}(300,200)
+        \put(65,165){\thicklines{\circle*{5}}}
+        \put(155,165){\thicklines{\circle*{5}}}
+        \put(245,165){\thicklines{\circle*{5}}}
+
+        \put(35,35){\thicklines{\circle*{5}}}
+        \put(65,35){\thicklines{\circle*{5}}}
+        \put(95,35){\thicklines{\circle*{5}}}
+
+        \bezier{500}(35,35)(35,35)(65,165)
+        \bezier{500}(65,35)(65,35)(65,165)
+        \bezier{500}(95,35)(95,35)(65,165)
+        \bezier{500}(35,35)(35,35)(155,165)
+        \bezier{500}(65,35)(65,35)(155,165)
+        \bezier{500}(95,35)(95,35)(155,165)
+        \bezier{500}(35,35)(35,35)(245,165)
+        \bezier{500}(65,35)(65,35)(245,165)
+        \bezier{500}(95,35)(95,35)(245,165)
+
+        \put(125,35){\thicklines{\circle*{5}}}
+        \put(155,35){\thicklines{\circle*{5}}}
+        \put(185,35){\thicklines{\circle*{5}}}
+
+        \bezier{500}(125,35)(125,35)(65,165)
+        \bezier{500}(155,35)(155,35)(65,165)
+        \bezier{500}(185,35)(185,35)(65,165)
+        \bezier{500}(125,35)(125,35)(155,165)
+        \bezier{500}(155,35)(155,35)(155,165)
+        \bezier{500}(185,35)(185,35)(155,165)
+        \bezier{500}(125,35)(125,35)(245,165)
+        \bezier{500}(155,35)(155,35)(245,165)
+        \bezier{500}(185,35)(185,35)(245,165)
+
+        \put(215,35){\thicklines{\circle*{5}}}
+        \put(245,35){\thicklines{\circle*{5}}}
+        \put(275,35){\thicklines{\circle*{5}}}
+
+        \bezier{500}(215,35)(215,35)(65,165)
+        \bezier{500}(245,35)(245,35)(65,165)
+        \bezier{500}(275,35)(275,35)(65,165)
+        \bezier{500}(215,35)(215,35)(155,165)
+        \bezier{500}(245,35)(245,35)(155,165)
+        \bezier{500}(275,35)(275,35)(155,165)
+        \bezier{500}(215,35)(215,35)(245,165)
+        \bezier{500}(245,35)(245,35)(245,165)
+        \bezier{500}(275,35)(275,35)(245,165)
+    \end{picture}
+    \caption{ Complete bipartite graph with parts consisting of 3 and 9 vertices. }
+    \label{full_graph_3_by_9}
+\end{figure}
+
+\begin{notice}
+    Any complete metagraph that has at least 2 vertices in one part and 3 in another has girth less than or equal to 12. Let us consider metagraph $G$ in figure \ref{full_graph_2_by_3}. $\mu =(e_1, e_4, e_5, e_2, e_3, e_6, e_4, e_1, e_2, e_5, e_6, e_3)$ is a cycle. Its characteristic is euqal to $x_1 - x_4 + x_5 - x_2 + x_3 - x_6 + x_4 - x_1 + x_2 - x_5 + x_6 - e_3 = 0$. Thus paths that correspond to $\mu$ are cycles on r-expansions of $G$.
+
+    Thereby to build r-extensions with girths greater than 12 non complete metagraphs must be used.
+\end{notice}
+
+
+\begin{figure}[H]
+    \centering
+    \begin{picture}(200,200)
+        \put(65,165){\thicklines{\circle*{5}}}
+        \put(155,165){\thicklines{\circle*{5}}}
+
+        \put(35,35){\thicklines{\circle*{5}}}
+        \put(110,35){\thicklines{\circle*{5}}}
+        \put(185,35){\thicklines{\circle*{5}}}
+
+        \bezier{500}(35,35)(35,35)(65,165)
+        \put(40,140){$e_1$}
+        \bezier{500}(110,35)(110,35)(65,165)
+        \put(65,120){$e_2$}
+        \bezier{500}(185,35)(185,35)(65,165)
+        \put(85,150){$e_3$}
+
+        \bezier{500}(35,35)(35,35)(155,165)
+        \put(125,150){$e_4$}
+        \bezier{500}(110,35)(110,35)(155,165)
+        \put(145,120){$e_5$}
+        \bezier{500}(185,35)(185,35)(155,165)
+        \put(165,140){$e_6$}
+    \end{picture}
+    \caption{ Complete metagraph $G$ with parts consisting of 2 and 3 vertices. }
+    \label{full_graph_2_by_3}
+\end{figure}
 
 \end{document}
