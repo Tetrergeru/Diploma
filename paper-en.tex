@@ -5,7 +5,7 @@
 
 \graphicspath{{paper_images/}}
 \newtheorem{theorem}{Theorem}
-\newtheorem{notice}{Notice}
+\newtheorem{notice}{Remark}
 
 % \newcounter{notice}[section]
 % \newenvironment{notice}[1][]{\refstepcounter{notice}\par\medskip
@@ -443,12 +443,12 @@ Let us apply Algorithm 1 for metagraph $G$ and girth to be 6. The set of labels,
     \centering
     \left\{
         \begin{array}{ll}
-            x_1 - x_2 &\neq 0             ; \\
-            x_3 - x_4 &\neq 0             ; \\
-            2 x_1 - 2 x_2 &\neq 0         ; \\
-            2 x_3 - 2 x_4 &\neq 0         ; \\
-            x_1 - x_2 - x_3 + x_4 &\neq 0 ; \\
-            x_1 - x_2 + x_3 - x_4 &\neq 0 . \\
+            x_1 - x_2 &\neq 0             (\mod{r}) ; \\
+            x_3 - x_4 &\neq 0             (\mod{r}) ; \\
+            2 x_1 - 2 x_2 &\neq 0         (\mod{r}) ; \\
+            2 x_3 - 2 x_4 &\neq 0         (\mod{r}) ; \\
+            x_1 - x_2 - x_3 + x_4 &\neq 0 (\mod{r}) ; \\
+            x_1 - x_2 + x_3 - x_4 &\neq 0 (\mod{r}) . \\
         \end{array}
         \label{eqs:cycle_search_neqs}
     \right.
@@ -466,18 +466,24 @@ Finding of the minimal solution for system \eqref{eqs:example}, is a computation
 
 \textbf{Algorithm 2.}
 
+At first consider system \eqref{eqs:example} without parameter $r$. Find a solution using the following steps
+
 \begin{enumerate}
     \item Let $e$ be the number of variables in a system of inequalities.
     \item If the system contains inequality $0 \neq 0$ then it has no solution, the algorithm halts.
-    \item Let us pick all inequalities of the form $a x_e + b \neq 0$. Let $I$ be the set of all such inequalities.
-    \item Let $v$ be a number such that $v \neq -b/a \forall a x_e + b \in I$, if $I = \varnothing$, then let $v = 0$. Such a number can be found because there is a finite amount of inequalities.
-    \item Substitute variable $x_e$ with value $v$ in all inequalities and add identity $x_e = v$ to solution. By $v$ selection conditions, none of inequalities will turn into $0 \neq 0$ by such a substitution. 
-    \item If $e = 1$ the algorithm halts, otherwise let $e = e - 1$ and return to step 3.
+    \item Select all inequalities of the form $a x_e + b \neq 0$. Denote the set of all such inequalities as $I$.
+    \item Let $v$ be a number such that $v \neq -b/a $ for each inequality $"a x_e + b \neq 0" \in I$. In case $I = \varnothing$ assign $v = 0$. Such a number can be found since $I$ is finite.
+    \item Substitute value $v$ instead of variable $x_e$ in all inequalities and add equality $x_e = v$ to the solution. By $v$ selection conditions, none of inequalities will turn into $0 \neq 0$ by such a substitution. 
+    \item If $e > 1$ assign $e = e - 1$ and return to step 3, otherwise the solution is found, proceed to calculation of parameter $r$.
 \end{enumerate}
 
-\textbf{Пример.}
+Substitute found solution to system \eqref{eqs:example}, denote the obtained system as $I_s$. All inequalities have form $a \neq 0 (\mod{r})$ where $r$ is an unknown parameter. Form of inequalities allow us to find it as $r = \max\limits_{"a \neq 0 (\mod{r})" \in I_s}\{ |a| \} + 1$.
 
-Let $x_1$ be $0$, substitute it in a system of inequalities.
+\textbf{Example.}
+
+Consider system of inequalities \eqref{eqs:cycle_search_neqs}.
+
+Assign $x_1 = 0$. Recalculate considered system with assigned value. We get
 
 \begin{equation}
     \centering
@@ -494,7 +500,7 @@ Let $x_1$ be $0$, substitute it in a system of inequalities.
     \label{eqs:cycle_search_neqs_1}
 \end{equation}
 
-Variable $x_2$ can not be equal to $0$, because it violates inequality $- x_2 \neq 0$. Let $x_2$ be $1$, substitute it in a system of inequalities.
+Variable $x_2$ can not be equal to $0$ since it would violate inequality $- x_2 \neq 0$. Assign $x_2 = 1$. We obtain
 
 \begin{equation}
     \centering
@@ -511,7 +517,7 @@ Variable $x_2$ can not be equal to $0$, because it violates inequality $- x_2 \n
     \label{eqs:cycle_search_neqs_2}
 \end{equation}
 
-Let $x_3$ be $0$, substitute it in a system of inequalities.
+Assigning $x_3 = 0$ similarly, we get
 
 \begin{equation}
     \centering
@@ -528,7 +534,7 @@ Let $x_3$ be $0$, substitute it in a system of inequalities.
     \label{eqs:cycle_search_neqs_3}
 \end{equation}
 
-Variable $x_4$ can not be equal to $0, 1, -1$, because it violates inequalities. Let $x_4$ be $2$, substitute it in a system of inequalities:
+Variable $x_4$ can not be equal to $0, 1$ and $-1$ since they violate the last inequalities. Assign $x_4 = 2$. We finally obtain
 
 \begin{equation}
     \centering
@@ -545,7 +551,9 @@ Variable $x_4$ can not be equal to $0, 1, -1$, because it violates inequalities.
     \label{eqs:cycle_search_neqs_4}
 \end{equation}
 
-Given inequalities do not allow $r$ to be $1, 2, 3, 4$, thus the least possible value of $r$ is $5$. 5-expansion of metagraph with weights, obtained as a solution to system (1), is shown in figure \ref{neq_system_res}. Girth of this graph is equal to $6$, and one of the cyc;es with length $6$ is marked in bold.
+% TODO: пронумеровать примеры и вставить нормальную ссылку
+
+This system does not allow $r$ to be $1, 2, 3$ and $4$, thus the least possible value of $r$ is $5$. 5-expansion of metagraph $G$ considered in example $<ref>$ with assigned weights, is shown in figure \ref{neq_system_res}. Girth of this graph is equal to $6$, and one of the cycles with length $6$ is marked in bold.
 
 \begin{figure}[H]
     \centering
@@ -598,7 +606,7 @@ Given inequalities do not allow $r$ to be $1, 2, 3, 4$, thus the least possible 
         \bezier{300}(190,165)(197,100)(205,35)
         \bezier{300}(50,165)(127,100)(205,35)
     \end{picture}
-    \caption{ Expansion of a metagraph with weights obtained as a solution of a system of inequalities. }
+    \caption{ Expansion of a metagraph with weights obtained as a solution of the system \eqref{eqs:cycle_search_neqs}. }
     \label{neq_system_res}
 \end{figure}
 
