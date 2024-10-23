@@ -462,8 +462,6 @@ Let us apply Algorithm 1 for metagraph $G$ and girth to be 6. The set of labels,
 
 Finding of the minimal solution for system \eqref{eqs:example}, is a computationally hard problem. It requires to enumerate all possible solutions and select the minimal one. Still, if system \eqref{eqs:example} has a solution then one of them can be found by the following algorithm.
 
-%%% ^^^^^^^^^^
-
 \textbf{Algorithm 2.}
 
 At first consider system \eqref{eqs:example} without parameter $r$. Find a solution using the following steps
@@ -619,9 +617,10 @@ This system does not allow $r$ to be $1, 2, 3$ and $4$, thus the least possible 
 In previous section we showed a method of finding weights, that allow us build metagraph expansions with given girth.
 But we have not suggested a way to select a structure of a metagraph such that it would be possible to find such weights, i.e. such that system (1) built by Algorithm 1 is non-contradicting.
 
-\begin{definition}
-    Let $G$ be a metagraph with variable weights. The girth of $G$ is the maximum among all girths of r-extensions of $G$.
-\end{definition}
+%% Проверить, что оно нигде дальше не используется
+% \begin{definition}
+%     Let $G$ be a metagraph with variable weights. The girth of $G$ is the maximum among all girths of r-extensions of $G$.
+% \end{definition}
 
 \begin{notice}
     Let us sequentially apply Algorithm 1 to $G$ with target girths of $4, 6, \dots, 2n$, where $2n$ is the first number for which algorithm couldn't build a solution. Then girth of metagraph $G$ is $2n - 2$.
@@ -689,11 +688,9 @@ Example of complete bipartite graph is shown in figure \ref{full_graph_3_by_9}.
 \end{figure}
 
 \begin{notice}
-    Any complete metagraph that has at least 2 vertices in one part and 3 in another has girth less than or equal to 12. Let us consider metagraph $G$ in figure \ref{full_graph_2_by_3}. $\mu =(e_1, e_4, e_5, e_2, e_3, e_6, e_4, e_1, e_2, e_5, e_6, e_3)$ is a cycle. Its characteristic is euqal to $x_1 - x_4 + x_5 - x_2 + x_3 - x_6 + x_4 - x_1 + x_2 - x_5 + x_6 - e_3 = 0$. Thus paths that correspond to $\mu$ are cycles on r-expansions of $G$.
-
-    Thereby to build r-extensions with girths greater than 12 non complete metagraphs must be used.
+    For any metagraph that has $K_{2,3}$ as a subgraph, the girth of any its r-expansion is at most 12.
+    Consider metagraph $G$ shown in figure \ref{full_graph_2_by_3}. Let $\mu = (e_1, e_4, e_5, e_2, e_3, e_6, e_4, e_1, e_2, e_5, e_6, e_3)$ be a cycle. Its characteristic is euqal to $x_1 - x_4 + x_5 - x_2 + x_3 - x_6 + x_4 - x_1 + x_2 - x_5 + x_6 - x_3 = 0$. Therefore, paths that correspond to $\mu$ are cycles with length of $12$ on r-expansions of $G$.
 \end{notice}
-
 
 \begin{figure}[H]
     \centering
@@ -721,6 +718,72 @@ Example of complete bipartite graph is shown in figure \ref{full_graph_3_by_9}.
     \end{picture}
     \caption{ Complete metagraph $G$ with parts consisting of 2 and 3 vertices. }
     \label{full_graph_2_by_3}
+\end{figure}
+
+%%% ^^^^^^^^^^
+
+\begin{theorem}
+
+    Let $G(V, E, f, w)$ be a metagraph, let $\mu$ be a cycle on metagraph $G$, let $a$ and $b$ be two (possibly equal) vertices on cycle $\mu$, and let $\eta$ be a path from $a$ to $b$ such that the first and the last edges of $\eta$ do not belong to $\mu$. Then girth of any r-expansion of $G$ is not greater than $2(|\mu| + |\eta|)$.
+
+\end{theorem}
+
+\begin{proof}
+
+    Denote inverse paths of $\mu$ and $\eta$ as $\mu'$ and $\eta'$ respectively.
+
+    Denote gluing $\nu = (\eta, \mu, \eta', \mu')$. This edge sequence does not have two equal edges in a row since the first and the last edges of the path $\eta$ do not belong to $\mu$, therefore, $\nu$ is a cycle on $G$.
+
+    Length of $\nu$ is $2(|\mu| + |\eta|)$.
+
+    Applying theorem \ref{glued_paths} calculate characteristic of $\nu$: $\chi(\nu) = \chi(\eta) + \chi(\mu) + \chi(\eta') + \chi(\mu') = \chi(\eta) + \chi(\mu) - \chi(\eta) - \chi(\mu) = 0$.
+
+    Thus corresponding paths of $\nu$ are cycles on any r-expansion of $G$. This means that girth of any r-expansion of $G$ is at most $2(|\mu| + |\eta|)$.
+
+\end{proof}
+
+% Становится полноценной теоремой, которую надо доказать
+
+\begin{theorem}\label{theorem_cycle_expansion}
+
+    Let $G(V, E, f)$ be a bipartite graph with girth $2l$. Let $G'(V, E, f, w')$ be a metagraph that is a weighted graph $G$. Then there is an r-expansion of $G'$ with girth greater then or equal to $6l$.
+
+\end{theorem}
+
+Thus, to construct graphs with greater girths metagraphs with greater girths should be used. For example multiple arcs must be avoided because they cause cycles with length $2$ significantly limiting the girth of an r-extension.
+
+\textbf{Algorithm 3.}
+
+To build a bipartite graph with girth greater then or equal to given number the following steps can be used: 
+
+\begin{itemize}
+    \item Build $G_0$ a complete graph, it has a girth of $4$.
+    \item Build $G_1$ applying algorithm 2 to metagraph with variable weights with structure from graph $G_0$. The girth of $G_1$ is greater then or equal to $6$.
+    \item Repeat the previous step applying algorithm 2 to graph with greater and greater girths, until the graph with the required girth is constructed.  
+\end{itemize}
+
+\textbf{Example.}
+
+Use algorithm 3 to build a (2,3)-regular bipartite graph with girth $14$.
+
+Build a (2,3)-regular complete metagraph. It has 2 control and 3 informational vertices and has girth of $4$. This graph is shown in figure \ref{full_graph_2_by_3}.
+
+Bipartite graph with girth $8$ build with algorithm 2 is shown in figure \ref{be_not_afraid}. It has 6 control and 9 informational vertices. Control vertices are located in the inner circle and informational on the outer one. Vertices are grouped by their corresponding vertex in metagraph.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.2]{graph_2.png}
+    \caption{ (2,3)-regular bipartite graph with girth of 8. }
+    \label{be_not_afraid}
+\end{figure}
+
+Bipartite graph with girth $14$ is shown in figure \ref{be_not_afraid_2}. It has 42 control and 63 informational vertices.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.2]{graph_3.png}
+    \caption{ (2,3)-regular bipartite graph with girth of 14. }
+    \label{be_not_afraid_2}
 \end{figure}
 
 \end{document}
