@@ -42,9 +42,12 @@ Let us give main definitions that are used onwards. We will use the definition o
 
 \end{definition}
 
+% Заменить path на walk или chain?
+% Поискать похожие статьи
+% Можно добавить замечание, что слово path "нам нравится больше" и поэтому мы оставляем его
+
 \begin{definition}
     Sequence of edges $\mu = (e_1, ..., e_d)$, such that $e_i \neq e_{i+1}$ for all $i < d$, is called a path with first vertex $v_0$ and last vertex $v_d$ on graph $G(V,E,f)$, if exists a sequence of vertices $(v_0, ..., v_d)$ such that $\forall i = 1,...,d:$ $(v_i, v_{i+1}) = f(e_i)$ or $(v_{i+1}, v_i) = f(e_i)$. 
-
 \end{definition}
 
 \begin{definition}
@@ -722,15 +725,32 @@ Example of complete bipartite graph is shown in figure \ref{full_graph_3_by_9}.
 
 %%% ^^^^^^^^^^
 
+\begin{definition}
+    Let $G$ be a graph which consists of a cycle $\mu$ and path $\eta$ such that
+
+    1. the first and the last vertices $a$ and $b$ of path $\eta$ (possibly equal) belong to cycle $\mu$,
+
+    2. the first and the last edges of $\eta$ do not belong to $\mu$.
+
+    % Как-то надо бы переделать тета-граф, можно посмотреть в книжке Зыкова, как он определяет графы
+    % Корзинка? Сумочка
+    Such a graph is called $(\mu + \eta)$-graph.
+\end{definition}
+
+\begin{definition}
+    Let $G$ be a graph. By $\Phi(G)$ denote the set of all $(\mu + \eta)$-subgraphs of $G$.
+\end{definition}
+
+\begin{definition}
+    Let $G$ be a graph and $H \in \Phi(G)$. Assign $|H| = |\mu| + |\eta|$.
+\end{definition}
+
 \begin{theorem}
-
-    Let $G(V, E, f, w)$ be a metagraph, let $\mu$ be a cycle on metagraph $G$, let $a$ and $b$ be two (possibly equal) vertices on cycle $\mu$, and let $\eta$ be a path from $a$ to $b$ such that the first and the last edges of $\eta$ do not belong to $\mu$. Then girth of any r-expansion of $G$ is not greater than $2(|\mu| + |\eta|)$.
-
+    Let $G$ be a metagraph and $H \in \Phi(G)$. Then girth of any r-expansion of $G$ is less than or equal to $2|H|$.
 \end{theorem}
 
 \begin{proof}
-
-    Denote inverse paths of $\mu$ and $\eta$ as $\mu'$ and $\eta'$ respectively.
+    Graph $H$ consists of a cycle $\mu$ and path $\eta$. Denote inverse paths of $\mu$ and $\eta$ as $\mu'$ and $\eta'$ respectively.
 
     Denote gluing $\nu = (\eta, \mu, \eta', \mu')$. This edge sequence does not have two equal edges in a row since the first and the last edges of the path $\eta$ do not belong to $\mu$, therefore, $\nu$ is a cycle on $G$.
 
@@ -738,15 +758,14 @@ Example of complete bipartite graph is shown in figure \ref{full_graph_3_by_9}.
 
     Applying theorem \ref{glued_paths} calculate characteristic of $\nu$: $\chi(\nu) = \chi(\eta) + \chi(\mu) + \chi(\eta') + \chi(\mu') = \chi(\eta) + \chi(\mu) - \chi(\eta) - \chi(\mu) = 0$.
 
-    Thus corresponding paths of $\nu$ are cycles on any r-expansion of $G$. This means that girth of any r-expansion of $G$ is at most $2(|\mu| + |\eta|)$.
-
+    Thus corresponding paths of $\nu$ are cycles on any r-expansion of $G$. This means that girth of any r-expansion of $G$ is at most $2(|\mu| + |\eta|) = 2|H|$.
 \end{proof}
 
 % Становится полноценной теоремой, которую надо доказать
 
 \begin{theorem}\label{theorem_cycle_expansion}
 
-    Let $G(V, E, f)$ be a bipartite graph with girth $2l$. Let $G'(V, E, f, w')$ be a metagraph that is a weighted graph $G$. Then there is an r-expansion of $G'$ with girth greater then or equal to $6l$.
+    Пусть $G'$ ~--- двудольный граф. Обозначим $\theta = \min\limits_{H \in \Phi(G')} \{ |H| \}$. Тогда существует набор весов дуг графа $G'$ такой, что для полученного метаграфа существовало расширение с обхватом больше или равным $2 \theta$.
 
 \end{theorem}
 
