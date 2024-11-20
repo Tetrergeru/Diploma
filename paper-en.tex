@@ -23,10 +23,25 @@
 
 \renewcommand{\mod}[1]{\textrm{mod}\ #1}
 
+\section{Introduction}
+
+% Многие современные алгоритмы помехоустойчивого кодирования используют двудольные графы с определёнными свойствами для коррекции ошибок при передаче данных через каналы с шумами. См., например, коды с малой плотностью проверок на чётность \cite{LDPC}. Из эмпирических данных следует, что для наиболее успешного кодирования следует использовать графы с максимальным обхватом.
+
+Many modern algorithms of data encoding use bipartite graphs with specific properties for error correction during data transmission over noise channels, e.g. Low Density Parity Check Codes \cite{LDPC}. 
+
+% [Deleted] Empirical data suggests that encoding efficiency is improved by using graphs with large girth.
+
+% Известны две основные группы методов построения таких двудольных графов: случайные, основанные на генерации начального графа случайным способом, например перебор возможных матриц \cite{bruteforce} и псевдослучайные пермутации матриц \cite{gallager}; и структурированные, основанные на построении графа с определённой, заранее известной структурой, например методы, использующие протографы \cite{protographs}.
+
+Methods of construction for such bipartite graphs are divided in two main categories: methods, based on random permutations of different graphs, e.g. brute-force search \cite{bruteforce} of pseudo-random permutation of matrices \cite{gallager}; and structured methods which build graphs based on fixed predefined structure, e.g. methods that use protographs \cite{protographs}.
+
+Протографами называют графы Таннера, обычно содержащие небольшое количество вершин, используемые как шаблоны для построения больших графов. Построение большего графа из протографа осуществляется методом "копирования-и-перестановки": сначала протограф копируется несколько раз, затем дуги копий переставляются между собой по определённым правилам, чтобы сделать граф связным. Свойства LDPC-кодов для графов, построенных на основе протографов можно анализировать, рассматривая только меньший протограф.
+
+В настоящей статье предложен структурный метод построения двудольных графов с заданным, произвольно большим обхватом методом расширения метаграфов. Разработан алгоритм для выбора оптимальных весов для заданного метаграфов. Дана точная оценка максимального обхвата среди всех возможных расширений метаграфа на основе его структуры. Предложен алгоритм для итеративного подбора структуры метаграфа для построения расширения с заданным обхватом.
 
 \section{Main definitions}
 
-Let us give main definitions that are used onwards. We will use the definition of a bipartite graph based on a definition 7.1 given in a book % <<Дискретная Математика>> Я.М. Ерусалимского % Сослаться на книжку Татта (Tutte) 
+The following definitions will be used onwards. We will use the definition of a bipartite graph based on a definition 7.1 given in a book % <<Дискретная Математика>> Я.М. Ерусалимского % Сослаться на книжку Татта (Tutte) 
 
 \begin{definition}
     A bipartite graph is a triple $G(V, E, f)$
@@ -761,15 +776,33 @@ Example of complete bipartite graph is shown in figure \ref{full_graph_3_by_9}.
     Thus corresponding paths of $\nu$ are cycles on any r-expansion of $G$. This means that girth of any r-expansion of $G$ is at most $2(|\mu| + |\eta|) = 2|H|$.
 \end{proof}
 
-% Становится полноценной теоремой, которую надо доказать
+\textbf{Теорема.}
 
-\begin{theorem}\label{theorem_cycle_expansion}
+% Пусть $G'$ ~--- двудольный граф. Обозначим $\theta = \min\limits_{H \in \Phi(G')} \{ |H| \}$. Тогда существует набор весов дуг графа $G'$ такой, что для полученного метаграфа существовало расширение с обхватом равным $2 \theta$.
 
-    Пусть $G'$ ~--- двудольный граф. Обозначим $\theta = \min\limits_{H \in \Phi(G')} \{ |H| \}$. Тогда существует набор весов дуг графа $G'$ такой, что для полученного метаграфа существовало расширение с обхватом больше или равным $2 \theta$.
+Let $G'$ be a bipartite graph, and $\theta = \min\limits_{H \in \Phi(G')} \{ |H| \}$. For graph $G'$, there exists a set of weights of its edges such that at least one of metagraph $G'$ expansions has girth $2 \theta$.
 
-\end{theorem}
+\begin{proof}
 
-Thus, to construct graphs with greater girths metagraphs with greater girths should be used. For example multiple arcs must be avoided because they cause cycles with length $2$ significantly limiting the girth of an r-extension.
+% Рассмотрим такие циклы на метаграфе, которые соответствуют циклам длины меньшей $2 \theta$ на некоторых расширениях, но существуют расширения, на которых таким циклам соответствуют пути, не являющиеся циклами.
+
+Consider set of cycles $C$ on metagraph $G'$ with length less then $2 \theta$ such that for each cycle $c \in C$ there exists an expansions of $G'$ on which $c$ corresponds to non-cycles only. 
+
+% Следовательно, можно используя Алгоритм 1 подобрать веса и $r$ такие что всем таким циклам будут соответствовать не циклы на расширениях. Таким образом можно ограничиться рассмотрением только тех расширений, на которых подобные циклы уже разорваны,  и рассматривать такие циклы на метаграфе, которым соответствуют циклы на всех расширениях. Обхваты всех таких расширений будут одинаковыми. Поэтому рассмотрим самый короткий из таких циклов.
+
+We can use Algorithms 1 and 2 to select weights $w$ and parameter $r$ such that all cycles from $C$ correspond to non-cycles on all expansions determined by pairs $(w, r)$. Thus we can consider only expansions, where cycles from $C$ are broken. Therefore, consider only cycles on metagraph which correspond to cycles on all expansions. Note that all expansions determined by pairs $(w, r)$ have similar girth. Therefore. we can consider the shortest of such cycles only.
+
+% Если циклу на метаграфе соответствуют циклы на всех расширениях, значит его характеристика обращается в $0$ вне зависимости от выбранных весов. Значит такой цикл проходит каждую свою дугу равное количество раз в противоположные стороны. 
+
+If a cycle on metagraph corresponds to cycles on all expansions, then its characteristic is $0$ independent of the selected weights. Hence this cycle walks through each of its edges the same number of times in the opposite directions.
+
+% Путь не может проходить одну и ту же дугу дважды подряд, значит его структура распадается на несколько циклов, которые склеиваются в вершине степени не меньше трёх. Эта структура соответствует циклу с ручкой или циклу с ручкой объединённому с дополнительными путями. Таким образом длина такого цикла будет не меньше, чем удвоенная длина цикла с ручкой. По предыдущей теореме, его длина не больше, чем удвоенная длина цикла с ручкой. Получаем, что длина такого цикла равна $2 \theta$.
+
+Path can not walk through the same edge twice in a row, so its structure consists of several cycles, which are glued in a vertex of degree $3$ or greater. This structure corresponds to $(\mu + \eta)$-graph possibly glued with some additional paths. The length of such a cycle is at least $2(|\mu| + |\eta|)$. By the previous theorem, its length is at most $2(|\mu| + |\eta|)$. Thus the length of such a cycle is precisely $2 \theta$.
+
+\end{proof}
+
+Note that to construct graph with great girth metagraph with small girths should not be used. For example parallel edges must be avoided because they cause cycles with length $2$ significantly limiting the girth of an r-extension.
 
 \textbf{Algorithm 3.}
 
@@ -804,5 +837,7 @@ Bipartite graph with girth $14$ is shown in figure \ref{be_not_afraid_2}. It has
     \caption{ (2,3)-regular bipartite graph with girth of 14. }
     \label{be_not_afraid_2}
 \end{figure}
+
+% Список литературы: 15 штук
 
 \end{document}
