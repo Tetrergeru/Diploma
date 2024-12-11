@@ -41,7 +41,7 @@ In this article we propose a structural method for construction of bipartite gra
 
 \section{Main definitions}
 
-The following definitions will be used onwards. We will use the definition of a bipartite graph based on a definition 7.1 given in a book % <<Дискретная Математика>> Я.М. Ерусалимского % Сослаться на книжку Татта (Tutte) 
+The following definitions will be used onwards. We will use the definition of a bipartite graph based on a definition 1 given in a book \cite{tutte_graph_definition}.
 
 \begin{definition}
     A bipartite graph is a triple $G(V, E, f)$
@@ -340,14 +340,14 @@ Theorems \ref{theorem_cycles} and \ref{theorem_wings} are direct corollaries of 
 \end{theorem}
 
 \begin{theorem}[on wings of cycles]\label{theorem_wings}
-    Let $\eta = (e_1, ..., e_d)$ and $\mu = (\epsilon_1, ..., \epsilon_{\delta})$ be different paths on metagraph $G$, with first vertex $a$, and last vertex $b$, $\chi(\eta) = \chi(\mu) (\mod{r})$, and let $\gamma = (e_1, \dots, e_d, \epsilon_{\delta}, \dots, \epsilon_1)$ be a path on $G$. Then paths on expansion which correspond to $\gamma$, are cycles.
+    Let $\eta = (e_1, ..., e_d)$ and $\mu = (\epsilon_1, ..., \epsilon_{\delta})$ be different paths on metagraph $G$, with first vertex $x$, and last vertex $y$, $\chi(\eta) = \chi(\mu) (\mod{r})$, and let $\gamma = (e_1, \dots, e_d, \epsilon_{\delta}, \dots, \epsilon_1)$ be a path on $G$. Then paths on expansion which correspond to $\gamma$, are cycles.
 \end{theorem}
 
 \section{On graphs with given girth.}
 
 % help us __to__ build?
 
-Let $G(V, E, f, w)$ be a metagraph and $w(e_i) = x_i \; \forall i = 0, \dots, |E|$, where $x_i$ are variables that will help us build a graph with given girth.
+Let $G(V, E, f, w)$ be a metagraph and $w(e_i) = w_i \; \forall i = 0, \dots, |E|$, where $w_i$ are variables that will help us build a graph with given girth.
 
 % Поискать, как в англоязычной литературе называют не равенства с \neq
 
@@ -381,7 +381,7 @@ For a given metagraph $G$, system \eqref{eqs:example} can be built using the fol
 
 \textbf{Algorithm 1.}
 
-Let $G(A \cup B, E, f, w)$ be a metagraph and let $w(e_i) = x_i \; \forall i = 0..|E|$.
+Let $G(A \cup B, E, f, w)$ be a metagraph and let $w(e_i) = w_i \; \forall i = 0..|E|$.
 
 % Нужно заменить g на какую-то не используемую выше букву и заменить во всей теореме
 
@@ -393,20 +393,19 @@ $ch \in \mathbb{Z}$ characteristic of the path $\mu$;
 $p \in V \cup \{ nil \}$ is an edge that was used to build this label, $nil \not\in V $ is a special value reserved for a starting label.
 
 Assign the system of all inequalities $\mathcal{S}$ to be empty.
-For each vertex $a \in A$:
+For each vertex $x \in A$:
 
 \begin{itemize}
-    \item Add starting label $(a, 0, 0, nil)$ to an empty set of all labels,
+    \item Add starting label $(x, 0, 0, nil)$ to an empty set of all labels,
     \item Iterating by $l$ from $1$ to $g / 2$:
     \begin{itemize}
         \item For all labels $(v, l - 1, ch, p)$:
         \item
-            % Что-то тут не чисто с p
             For each edge $e \not= p$ incident to vertex $v$,
             build label $(v', l, ch', p)$, where $ch' = ch + (-1)^{l} w(p)$, $v'$ is a vertex different from $v$, incident to $p$.
             Add this label to the set of all labels.
     \end{itemize}
-    \item for all pairs of labels $(v_1, l_1, ch_1, p_1)$ and $(v_2, l_2, ch_2, p_2)$ such that $v_1 = v_2$ and $l_1 = l_2$, add inequality $ch_1 \neq \ch_2$ to the system $\mathcal{S}$.
+    \item for all pairs of labels $(v_1, l_1, ch_1, p_1)$ and $(v_2, l_2, ch_2, p_2)$ such that $v_1 = v_2$ and $l_1 = l_2$, add inequality $ch_1 \neq \ch_2 (\mod{r})$ to the system $\mathcal{S}$.
 \end{itemize}
 
 \begin{notice}
@@ -415,7 +414,7 @@ For each vertex $a \in A$:
 
 \textbf{Example.}
 
-In figure \ref{neq_system_graph} the metagraph $G$ with for edges $e_1, e_2, e_3, e_4$ is shown. Weights of edges are variables $x_1, x_2, x_3, x_4$.
+In figure \ref{neq_system_graph} the metagraph $G$ with for edges $e_1, e_2, e_3, e_4$ is shown. Weights of edges are variables $w_1, w_2, w_3, w_4$.
 
 \begin{figure}[H]
     \centering
@@ -430,18 +429,18 @@ In figure \ref{neq_system_graph} the metagraph $G$ with for edges $e_1, e_2, e_3
         \put(110,20){$v_3$}
     
         \bezier{300}(75,165)(10,100)(35,35)
-        \put(5,100){$x_1$}
+        \put(5,100){$w_1$}
 
         \bezier{300}(75,165)(56,100)(35,35)
-        \put(56,80){$x_2$}
+        \put(56,80){$w_2$}
     
         \bezier{300}(75,165)(140,100)(115,35)
-        \put(125,100){$x_3$}
+        \put(125,100){$w_3$}
 
         \bezier{300}(75,165)(94,100)(115,35)
-        \put(87,80){$x_4$}
+        \put(87,80){$w_4$}
     \end{picture}
-    \caption{ Metagraph $G$, with variable weights of edges $x_1, x_2, x_3, x_4$. }
+    \caption{ Metagraph $G$, with variable weights of edges $w_1, w_2, w_3, w_4$. }
     \label{neq_system_graph}
 \end{figure}
 
@@ -453,10 +452,10 @@ Let us apply Algorithm 1 for metagraph $G$ and girth to be 6. The set of labels,
     \begin{tabular}{ | c | c | c | }
         \hline
         $g = 0$            & $g = 1$               & $g = 2$                   \\ \hline
-        $(0, v_1, 0, nil)$ & $(1, v_2,  x_1, e_1)$ & $(2, v_1,  x_1 - x_2, b)$ \\ \hline
-                           & $(1, v_2,  x_2, e_2)$ & $(2, v_1,  x_2 - x_1, a)$ \\ \hline
-                           & $(1, v_3,  x_3, e_3)$ & $(2, v_1,  x_3 - x_4, e)$ \\ \hline
-                           & $(1, v_3,  x_4, e_4)$ & $(2, v_1,  x_4 - x_3, d)$ \\ \hline
+        $(0, v_1, 0, nil)$ & $(1, v_2,  w_1, e_1)$ & $(2, v_1,  w_1 - w_2, b)$ \\ \hline
+                           & $(1, v_2,  w_2, e_2)$ & $(2, v_1,  w_2 - w_1, a)$ \\ \hline
+                           & $(1, v_3,  w_3, e_3)$ & $(2, v_1,  w_3 - w_4, e)$ \\ \hline
+                           & $(1, v_3,  w_4, e_4)$ & $(2, v_1,  w_4 - w_3, d)$ \\ \hline
     \end{tabular}
     \caption{ The set of labels constructed during the execution of the Algorithm 1. }
     \label{cycle_search_table_neq}
@@ -466,20 +465,18 @@ Let us apply Algorithm 1 for metagraph $G$ and girth to be 6. The set of labels,
     \centering
     \left\{
         \begin{array}{ll}
-            x_1 - x_2 &\neq 0             (\mod{r}) ; \\
-            x_3 - x_4 &\neq 0             (\mod{r}) ; \\
-            2 x_1 - 2 x_2 &\neq 0         (\mod{r}) ; \\
-            2 x_3 - 2 x_4 &\neq 0         (\mod{r}) ; \\
-            x_1 - x_2 - x_3 + x_4 &\neq 0 (\mod{r}) ; \\
-            x_1 - x_2 + x_3 - x_4 &\neq 0 (\mod{r}) . \\
+            w_1 - w_2 &\neq 0             (\mod{r}) ; \\
+            w_3 - w_4 &\neq 0             (\mod{r}) ; \\
+            2 w_1 - 2 w_2 &\neq 0         (\mod{r}) ; \\
+            2 w_3 - 2 w_4 &\neq 0         (\mod{r}) ; \\
+            w_1 - w_2 - w_3 + w_4 &\neq 0 (\mod{r}) ; \\
+            w_1 - w_2 + w_3 - w_4 &\neq 0 (\mod{r}) . \\
         \end{array}
         \label{eqs:cycle_search_neqs}
     \right.
 \end{equation}
 
 \section{Solving systems of inequalities}
-
-% Абзац про минимизацию r 
 
 % Still ???
 
@@ -493,7 +490,7 @@ At first consider system \eqref{eqs:example} without parameter $r$. Find a solut
     \item Let $e$ be the number of variables in a system of inequalities.
     \item If the system contains inequality $0 \neq 0$ then it has no solution, the algorithm halts.
     \item Select all inequalities of the form $a x_e + b \neq 0$. Denote the set of all such inequalities as $I$.
-    \item Let $v$ be a number such that $v \neq -b/a $ for each inequality $"a x_e + b \neq 0" \in I$. In case $I = \varnothing$ assign $v = 0$. Such a number can be found since $I$ is finite.
+    \item Let $v$ be a number such that $v \neq -b/a $ for each inequality $"a x_e + b \neq 0 (\mod{r})" \in I$. In case $I = \varnothing$ assign $v = 0$. Such a number can be found since $I$ is finite.
     \item Substitute value $v$ instead of variable $x_e$ in all inequalities and add equality $x_e = v$ to the solution. By $v$ selection conditions, none of inequalities will turn into $0 \neq 0$ by such a substitution. 
     \item If $e > 1$ assign $e = e - 1$ and return to step 3, otherwise the solution is found, proceed to calculation of parameter $r$.
 \end{enumerate}
@@ -504,77 +501,75 @@ Substitute found solution to system \eqref{eqs:example}, denote the obtained sys
 
 Consider system of inequalities \eqref{eqs:cycle_search_neqs}.
 
-Assign $x_1 = 0$. Recalculate considered system with assigned value. We get
+Assign $w_1 = 0$. Recalculate considered system with assigned value. We get
 
 \begin{equation}
     \centering
     \left\{
         \begin{array}{ll}
-            - x_2 &\neq 0            ; \\
-            x_3 - x_4 &\neq 0        ; \\
-            - 2 x_2 &\neq 0          ; \\
-            - 2 x_4 &\neq 0          ; \\
-            - x_2 - x_3 + x_4 &\neq 0; \\
-            - x_2 + x_3 - x_4 &\neq 0. \\
+            - w_2 &\neq 0             (\mod{r}); \\
+            w_3 - w_4 &\neq 0         (\mod{r}); \\
+            - 2 w_2 &\neq 0           (\mod{r}); \\
+            - 2 w_4 &\neq 0           (\mod{r}); \\
+            - w_2 - w_3 + w_4 &\neq 0 (\mod{r}); \\
+            - w_2 + w_3 - w_4 &\neq 0 (\mod{r}). \\
         \end{array}
     \right..
     \label{eqs:cycle_search_neqs_1}
 \end{equation}
 
-Variable $x_2$ can not be equal to $0$ since it would violate inequality $- x_2 \neq 0$. Assign $x_2 = 1$. We obtain
+Variable $w_2$ can not be equal to $0$ since it would violate inequality $- w_2 \neq 0$. Assign $w_2 = 1$. We obtain
 
 \begin{equation}
     \centering
     \left\{
         \begin{array}{ll}
-            - 1 &\neq 0             ; \\
-            x_3 - x_4 &\neq 0       ; \\
-            - 2 &\neq 0             ; \\
-            - 2 x_4 &\neq 0         ; \\
-            - 1 - x_3 + x_4 &\neq 0 ; \\
-            - 1 + x_3 - x_4 &\neq 0 . \\
+            - 1 &\neq 0              (\mod{r}); \\
+            w_3 - w_4 &\neq 0        (\mod{r}); \\
+            - 2 &\neq 0              (\mod{r}); \\
+            - 2 w_4 &\neq 0          (\mod{r}); \\
+            - 1 - w_3 + w_4 &\neq 0  (\mod{r}); \\
+            - 1 + w_3 - w_4 &\neq 0  (\mod{r}). \\
         \end{array}
     \right..
     \label{eqs:cycle_search_neqs_2}
 \end{equation}
 
-Assigning $x_3 = 0$ similarly, we get
+Assigning $w_3 = 0$ similarly, we get
 
 \begin{equation}
     \centering
     \left\{
         \begin{array}{ll}
-            - 1 &\neq 0       ; \\
-            - x_4 &\neq 0     ; \\
-            - 2 &\neq 0       ; \\
-            - 2 x_4 &\neq 0   ; \\
-            - 1 + x_4 &\neq 0 ; \\
-            - 1 - x_4 &\neq 0 . \\
+            - 1 &\neq 0        (\mod{r}); \\
+            - w_4 &\neq 0      (\mod{r}); \\
+            - 2 &\neq 0        (\mod{r}); \\
+            - 2 w_4 &\neq 0    (\mod{r}); \\
+            - 1 + w_4 &\neq 0  (\mod{r}); \\
+            - 1 - w_4 &\neq 0  (\mod{r}). \\
         \end{array}
     \right..
     \label{eqs:cycle_search_neqs_3}
 \end{equation}
 
-Variable $x_4$ can not be equal to $0, 1$ and $-1$ since they violate the last inequalities. Assign $x_4 = 2$. We finally obtain
+Variable $w_4$ can not be equal to $0, 1$ and $-1$ since they violate the last inequalities. Assign $w_4 = 2$. We finally obtain
 
 \begin{equation}
     \centering
     \left\{
         \begin{array}{ll}
-            - 1 &\neq 0   ; \\
-            - 2 &\neq 0   ; \\
-            - 2 &\neq 0   ; \\
-            - 4 &\neq 0   ; \\
-              1 &\neq 0   ; \\
-            - 3 &\neq 0   . \\
+            - 1 &\neq 0    (\mod{r}) ; \\
+            - 2 &\neq 0    (\mod{r}) ; \\
+            - 2 &\neq 0    (\mod{r}) ; \\
+            - 4 &\neq 0    (\mod{r}) ; \\
+              1 &\neq 0    (\mod{r}) ; \\
+            - 3 &\neq 0    (\mod{r}) . \\
         \end{array}
     \right..
     \label{eqs:cycle_search_neqs_4}
 \end{equation}
 
-% TODO: пронумеровать примеры и вставить нормальную ссылку
-
-This system does not allow $r$ to be $1, 2, 3$ and $4$, thus the least possible value of $r$ is $5$. 5-expansion of metagraph $G$ considered in example $<ref>$ with assigned weights, is shown in figure \ref{neq_system_res}. Girth of this graph is equal to $6$, and one of the cycles with length $6$ is marked in bold.
+This system does not allow $r$ to be $1, 2, 3$ and $4$, thus the least possible value of $r$ is $5$. 5-expansion of metagraph $G$ considered in figure \ref{neq_system_graph} with assigned weights, is shown in figure \ref{neq_system_res}. Girth of this graph is equal to $6$, and one of the cycles with length $6$ is marked in bold.
 
 \begin{figure}[H]
     \centering
@@ -708,7 +703,7 @@ Example of complete bipartite graph is shown in figure \ref{full_graph_3_by_9}.
 
 \begin{notice}
     For any metagraph that has $K_{2,3}$ as a subgraph, the girth of any its r-expansion is at most 12.
-    Consider metagraph $G$ shown in figure \ref{full_graph_2_by_3}. Let $\mu = (e_1, e_4, e_5, e_2, e_3, e_6, e_4, e_1, e_2, e_5, e_6, e_3)$ be a cycle. Its characteristic is euqal to $x_1 - x_4 + x_5 - x_2 + x_3 - x_6 + x_4 - x_1 + x_2 - x_5 + x_6 - x_3 = 0$. Therefore, paths that correspond to $\mu$ are cycles with length of $12$ on r-expansions of $G$.
+    Consider metagraph $G$ shown in figure \ref{full_graph_2_by_3}. Let $\mu = (e_1, e_4, e_5, e_2, e_3, e_6, e_4, e_1, e_2, e_5, e_6, e_3)$ be a cycle. Its characteristic is euqal to $w_1 - w_4 + w_5 - w_2 + w_3 - w_6 + w_4 - w_1 + w_2 - w_5 + w_6 - w_3 = 0$. Therefore, paths that correspond to $\mu$ are cycles with length of $12$ on r-expansions of $G$.
 \end{notice}
 
 \begin{figure}[H]
@@ -742,7 +737,7 @@ Example of complete bipartite graph is shown in figure \ref{full_graph_3_by_9}.
 \begin{definition}
     Let $G$ be a graph which consists of a cycle $\mu$ and path $\eta$ such that
 
-    1. the first and the last vertices $a$ and $b$ of path $\eta$ (possibly equal) belong to cycle $\mu$,
+    1. the first and the last vertices $x$ and $y$ of path $\eta$ (possibly equal) belong to cycle $\mu$,
 
     2. the first and the last edges of $\eta$ do not belong to $\mu$.
 
@@ -775,15 +770,17 @@ Example of complete bipartite graph is shown in figure \ref{full_graph_3_by_9}.
     Thus corresponding paths of $\nu$ are cycles on any r-expansion of $G$. This means that girth of any r-expansion of $G$ is at most $2(|\mu| + |\eta|) = 2|H|$.
 \end{proof}
 
-\textbf{Теорема.}
+\begin{theorem}
 
 Let $G'$ be a bipartite graph, and $\theta = \min\limits_{H \in \Phi(G')} \{ |H| \}$. For graph $G'$, there exists a set of weights of its edges such that at least one of metagraph $G'$ expansions has girth $2 \theta$.
 
+\end{theorem}
+
 \begin{proof}
 
-Consider set of cycles $C$ on metagraph $G'$ with length less then $2 \theta$ such that for each cycle $c \in C$ there exists an expansions of $G'$ on which $c$ corresponds to non-cycles only. 
+Consider set of cycles $\mathcal{H}_G$ on metagraph $G'$ with length less then $2 \theta$ such that for each cycle $c \in C$ there exists an expansions of $G'$ on which $c$ corresponds to non-cycles only. 
 
-We can use Algorithms 1 and 2 to select weights $w$ and parameter $r$ such that all cycles from $C$ correspond to non-cycles on all expansions determined by pairs $(w, r)$. Thus we can consider only expansions, where cycles from $C$ are broken. Therefore, consider only cycles on metagraph which correspond to cycles on all expansions. Note that all expansions determined by pairs $(w, r)$ have similar girth. Therefore. we can consider the shortest of such cycles only.
+We can use Algorithms 1 and 2 to select weights $w$ and parameter $r$ such that all cycles from $\mathcal{H}_G$ correspond to non-cycles on all expansions determined by pairs $(w, r)$. Thus we can consider only expansions, where cycles from $\mathcal{H}_G$ are broken. Therefore, consider only cycles on metagraph which correspond to cycles on all expansions. Note that all expansions determined by pairs $(w, r)$ have similar girth. Therefore. we can consider the shortest of such cycles only.
 
 If a cycle on metagraph corresponds to cycles on all expansions, then its characteristic is $0$ independent of the selected weights. Hence this cycle walks through each of its edges the same number of times in the opposite directions.
 
@@ -829,10 +826,6 @@ Bipartite graph with girth $14$ is shown in figure \ref{be_not_afraid_2}. It has
 
 \section{Conclusion.}
 
-% Заключение: 
-% <"повторить" последний абзац введения>
-% Планы на будущее: обобщить концепцию метаграфов для произвольных (не двудольных) графов
-
 % Посмотреть какие времена используются в заключениях в других статьях
 % Проверить, подходит ли слово precise в этом контексте
 
@@ -843,6 +836,8 @@ These algorithms and theorems might in future be generalized for any graphs. Gen
 \section{Literature.}
 
 % Список литературы: ~15 штук
+
+\begin{thebibliography}{0}
 
 \bibitem{zemor}
 G. Zémor, On Expander Codes, IEEE Trans. on Information theory, IT-47
@@ -867,33 +862,37 @@ Low-density parity-check (LDPC) codes constructed from protographs.
 Skorokhodov V.A. Generalization of the Reachability Problem on Directed Graphs
 ~-- Mathematics and Statistics, Vol. 8, No. 6, pp. 699 - 704, 2020. DOI: 10.13189/ms.2020.080610
 
+\bibitem{tutte_graph_definition}
+W.T. Tutte, Graph Theory
+~-- % https://books.google.rs/books?id=uTGhooU37h4C&printsec=frontcover#v=onepage&q&f=false
+Chapter 1, page 1
+
+%% https://errorcorrectionzoo.org/
+
+\bibitem{margulis_construction}
+G. A. MARGULIS EXPLICIT CONSTRUCTIONS OF GRAPHS WITHOUT SHORT CYCLES AND LOW DENSITY CODES 
+%% https://sci-hub.se/10.1007/bf02579283
+
+
+\bibitem{imrich_construction}
+Imrich, W. (1984). Explicit construction of regular graphs without small cycles
+%% https://sci-hub.se/10.1007/bf02579157
+
+
+%% Критика метода Маргулиса
+\bibitem{margulis_critique}
+David J.C. MacKay, Michael S. Postol, Weaknesses of Margulis and Ramanujan–Margulis Low-Density Parity-Check Codes
+% https://www.inference.org.uk/mackay/margulis.pdf
+
+
+%% Discard
 
 
 % \bibitem{metagraphs_and_applications}
 % A. Basu, R.W. Blanning. Mategraphs and Their Applications
 % ~-- %https://books.google.rs/books?id=9DlhUIJklqUC&printsec=frontcover#v=onepage&q&f=false
 
-\bibitem{tutte_graph_definition}
-W.T. Tutte, Graph Theory
-~-- % https://books.google.rs/books?id=uTGhooU37h4C&printsec=frontcover#v=onepage&q&f=false
-Chapter 1, page 1
 
-
-%% https://errorcorrectionzoo.org/
-
-
-
-%% G. A. MARGULIS EXPLICIT CONSTRUCTIONS OF GRAPHS WITHOUT SHORT CYCLES AND LOW DENSITY CODES 
-%% https://sci-hub.se/10.1007/bf02579283
-
-%% Imrich, W. (1984). Explicit construction of regular graphs without small cycles
-%% https://sci-hub.se/10.1007/bf02579157
-
-%% David J.C. MacKay, Michael S. Postol, Weaknesses of Margulis and Ramanujan–Margulis Low-Density Parity-Check Codes
-%% https://www.inference.org.uk/mackay/margulis.pdf
-%% Критика метода Маргулиса
-
-
-
+\end{thebibliography}
 
 \end{document}
