@@ -9,10 +9,6 @@
 
 %%%%% TODO
 
-% Заключение: 
-% <"повторить" последний абзац введения>
-% Планы на будущее: обобщить концепцию метаграфов для произвольных (не двудольных) графов
-
 % Литература
 
 % Разобрать комментарии по тексту
@@ -68,6 +64,10 @@ The following definitions will be used onwards. We will use the definition of a 
 \begin{definition}
     Sequence of edges $\mu = (e_1, ..., e_d)$, such that $e_i \neq e_{i+1}$ for all $i < d$, is called a path with first vertex $v_0$ and last vertex $v_d$ on graph $G(V,E,f)$, if exists a sequence of vertices $(v_0, ..., v_d)$ such that $\forall i = 1,...,d:$ $(v_i, v_{i+1}) = f(e_i)$ or $(v_{i+1}, v_i) = f(e_i)$. 
 \end{definition}
+
+\begin{notice}
+    Sometimes the distinction between walks, trails and paths is made, in this paper we decided to use word path for all such objects.
+\end{notice}
 
 \begin{definition}
     A cycle is a path, for which the first and the last vertices are equal.
@@ -297,7 +297,7 @@ Consider graph on figure \ref{metagraph_3_expansion}. Path $(e_1, e_2)$ is a cyc
 It is clear that the following theorem holds.
 
 \begin{theorem} \label{glued_paths}
-    Let $G$ be a metagraph, $\mu = (e_1, \dots, e_d)$ and $\eta = (u_1, \dots, u_k)$ be paths on $G$ and let $\xi = (e_1, \dots, e_d, u_1, \dots, u_k)$ also be a path on $G$; let $\mu' = (e_d, \dots, e_1)$ be an inversion path of $\mu$. Then the following relations are true:
+    Let $G$ be a metagraph, $\mu = (e_1, \dots, e_d)$ and $\eta = (u_1, \dots, u_k)$ be paths on $G$ and let gluing $\xi = (e_1, \dots, e_d, u_1, \dots, u_k)$ also be a path on $G$; let $\mu' = (e_d, \dots, e_1)$ be an inversion path of $\mu$. Then the following relations are true:
 
     1. $ \chi(\xi) = \chi(\mu) + \chi(\eta)$,
 
@@ -312,7 +312,7 @@ It is clear that the following theorem holds.
 \end{theorem}
     
 \begin{proof}
-    % Посмотреть, как по книжке Сосинского правильно описывать индукцию
+    % Посмотреть, как в Discrete math Ерусалимского Скороходова
     Conduct the proof by method of mathematical induction on the length of the path $|\eta| = d$.
     
     \begin{enumerate}
@@ -401,6 +401,7 @@ For each vertex $a \in A$:
     \begin{itemize}
         \item For all labels $(v, l - 1, ch, p)$:
         \item
+            % Что-то тут не чисто с p
             For each edge $e \not= p$ incident to vertex $v$,
             build label $(v', l, ch', p)$, where $ch' = ch + (-1)^{l} w(p)$, $v'$ is a vertex different from $v$, incident to $p$.
             Add this label to the set of all labels.
@@ -639,6 +640,7 @@ This system does not allow $r$ to be $1, 2, 3$ and $4$, thus the least possible 
 In previous section we showed a method of finding weights, that allow us build metagraph expansions with given girth.
 But we have not suggested a way to select a structure of a metagraph such that it would be possible to find such weights, i.e. such that system (1) built by Algorithm 1 is non-contradicting.
 
+% Какое-то странное замечание
 \begin{notice}
     Let us sequentially apply Algorithm 1 to $G$ with target girths of $4, 6, \dots, 2n$, where $2n$ is the first number for which algorithm couldn't build a solution. Then girth of metagraph $G$ is $2n - 2$.
 \end{notice}
@@ -789,7 +791,7 @@ Path can not walk through the same edge twice in a row, so its structure consist
 
 \end{proof}
 
-Note that to construct graph with great girth metagraph with small girths should not be used. For example parallel edges must be avoided because they cause cycles with length $2$ significantly limiting the girth of an r-extension.
+Note that to construct graph with great girth metagraph with small girths should not be used. For example parallel edges must be avoided because they cause cycles with length $2$ significantly limiting the girth of an r-expansion.
 
 \textbf{Algorithm 3.}
 
@@ -825,6 +827,73 @@ Bipartite graph with girth $14$ is shown in figure \ref{be_not_afraid_2}. It has
     \label{be_not_afraid_2}
 \end{figure}
 
-% Список литературы: 15 штук
+\section{Conclusion.}
+
+% Заключение: 
+% <"повторить" последний абзац введения>
+% Планы на будущее: обобщить концепцию метаграфов для произвольных (не двудольных) графов
+
+% Посмотреть какие времена используются в заключениях в других статьях
+% Проверить, подходит ли слово precise в этом контексте
+
+In this article we have proposed a structural method for construction of bipartite graphs with any given girth by expanding metagraphs. The algorithm for selection of optimal weights for metagraphs was developed. Precise estimation of girth among all expansions of metagraph was given. Algorithm for iterative selection of metragraph structure was proposed.
+
+These algorithms and theorems might in future be generalized for any graphs. Generalized algorithms can be used for construction of structured graphs with specific properties.
+
+\section{Literature.}
+
+% Список литературы: ~15 штук
+
+\bibitem{zemor}
+G. Zémor, On Expander Codes, IEEE Trans. on Information theory, IT-47
+No 2, (2001) pp. 835–837.
+  
+\bibitem{johnson}
+S.\,J. Johnson,
+Introducing Low-Density Parity-Check Codes.
+~-- University of Newcastle, Australia, 2006.
+
+\bibitem{gallager}
+R.\,G. Gallager,
+Low-density parity-check codes
+~-- IRE Transactions on Information Theory, 1962.
+
+\bibitem{protographs}
+J. Thorpe,
+Low-density parity-check (LDPC) codes constructed from protographs.
+~-- JPL, IPN Progress Rep., Aug. 2003, vol. 42–154.
+
+\bibitem{skorohodov_reachability_problem}
+Skorokhodov V.A. Generalization of the Reachability Problem on Directed Graphs
+~-- Mathematics and Statistics, Vol. 8, No. 6, pp. 699 - 704, 2020. DOI: 10.13189/ms.2020.080610
+
+
+
+% \bibitem{metagraphs_and_applications}
+% A. Basu, R.W. Blanning. Mategraphs and Their Applications
+% ~-- %https://books.google.rs/books?id=9DlhUIJklqUC&printsec=frontcover#v=onepage&q&f=false
+
+\bibitem{tutte_graph_definition}
+W.T. Tutte, Graph Theory
+~-- % https://books.google.rs/books?id=uTGhooU37h4C&printsec=frontcover#v=onepage&q&f=false
+Chapter 1, page 1
+
+
+%% https://errorcorrectionzoo.org/
+
+
+
+%% G. A. MARGULIS EXPLICIT CONSTRUCTIONS OF GRAPHS WITHOUT SHORT CYCLES AND LOW DENSITY CODES 
+%% https://sci-hub.se/10.1007/bf02579283
+
+%% Imrich, W. (1984). Explicit construction of regular graphs without small cycles
+%% https://sci-hub.se/10.1007/bf02579157
+
+%% David J.C. MacKay, Michael S. Postol, Weaknesses of Margulis and Ramanujan–Margulis Low-Density Parity-Check Codes
+%% https://www.inference.org.uk/mackay/margulis.pdf
+%% Критика метода Маргулиса
+
+
+
 
 \end{document}
