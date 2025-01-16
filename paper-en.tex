@@ -1,7 +1,6 @@
-\documentclass[14pt]{mmcs-article}
-\usepackage[russian]{babel}
+% \documentclass[14pt]{mmcs-article}
+\documentclass[a4paper,fleqn]{cas-sc}
 \usepackage{amsmath, amsthm, amsfonts, amssymb}
-\usepackage{listings, listings-rust}
 
 \graphicspath{{paper_images/}}
 \newtheorem{theorem}{Theorem}
@@ -109,9 +108,10 @@ Consider weighted bipartite graphs that can be used to build larger graphs with 
 
 Example \ref{image:2} shows metagraph  $G_1$ with three vertices and four edges.
 
-\begin{figure}[H]
+% Отмасштабировать все картинки
+\begin{figure}[!h]
     \centering
-    \begin{picture}(150,200)
+    \begin{picture}(150,170)
         \put(75,165){\thicklines{\circle*{5}}}
         \put(70,170){$c_1$}
     
@@ -151,7 +151,7 @@ Example \ref{image:2} shows metagraph  $G_1$ with three vertices and four edges.
 
 Example \ref{image:3} shows graph, built as a 4-expansion of metagraph $G_1$, shown in example \ref{image:2}.
 
-\begin{figure}[H]
+\begin{figure}[!h]
     \centering
     \begin{picture}(450,200)
         \put(75,165){\thicklines{\circle*{5}}}
@@ -229,7 +229,7 @@ Example \ref{image:3} shows graph, built as a 4-expansion of metagraph $G_1$, sh
 
 Consider graph on figure \ref{metagraph_3_expansion}. Path $(e_1, e_2)$ is a cycle on metagraph, but none of it's corresponding paths  $\mu_1 = (e^{(1)}_1, e^{(1)}_2)$, $\mu_2 = (e^{(2)}_1, e^{(2)}_2)$, $\mu_3 = (e^{(3)}_1, e^{(3)}_2)$  on 3-expansion is a cycle. Notice that concatenation of these three paths $\mu = (e^{(1)}_1, e^{(1)}_2, e^{(2)}_1, e^{(2)}_2, e^{(3)}_1, e^{(3)}_2)$ is a cycle with length 6. Cycle $\mu$ corresponds to cycle $(e_1, e_2, e_1, e_2, e_1, e_2)$ on metagraph.
 
-\begin{figure}[H]
+\begin{figure}[!h]
     \centering
     \begin{picture}(255,200)
         \put(0,165){$a.$}
@@ -372,7 +372,7 @@ where $\mathcal{H}_G(g)$ is the set of all cycles on $G$ with length less then $
 
 \begin{proof}
     % exhausts?
-    The construction of system (1) exhausts all cycles, hence the absence of a solution is equivalent to existence of a cycle with length less then $g$ on any expansion. Thus the existence of a solution for system (1) is equivalent to existence of an expansion with girth greater than $g$.
+    The construction of system \eqref{eqs:example} exhausts all cycles, hence the absence of a solution is equivalent to existence of a cycle with length less then $g$ on any expansion. Thus the existence of a solution for system \eqref{eqs:example} is equivalent to existence of an expansion with girth greater than $g$.
 \end{proof}
 
 % Добавить везде где надо (\mod{r})
@@ -382,8 +382,6 @@ For a given metagraph $G$, system \eqref{eqs:example} can be built using the fol
 \textbf{Algorithm 1.}
 
 Let $G(A \cup B, E, f, w)$ be a metagraph and let $w(e_i) = w_i \; \forall i = 0..|E|$.
-
-% Нужно заменить g на какую-то не используемую выше букву и заменить во всей теореме
 
 This algorithm is based on the construction of the set of labels.
 Each such label is a quadruple $(v, l, ch, p)$,
@@ -405,7 +403,7 @@ For each vertex $x \in A$:
             build label $(v', l, ch', p)$, where $ch' = ch + (-1)^{l} w(p)$, $v'$ is a vertex different from $v$, incident to $p$.
             Add this label to the set of all labels.
     \end{itemize}
-    \item for all pairs of labels $(v_1, l_1, ch_1, p_1)$ and $(v_2, l_2, ch_2, p_2)$ such that $v_1 = v_2$ and $l_1 = l_2$, add inequality $ch_1 \neq \ch_2 (\mod{r})$ to the system $\mathcal{S}$.
+    \item for all pairs of labels $(v_1, l_1, ch_1, p_1)$ and $(v_2, l_2, ch_2, p_2)$ such that $v_1 = v_2$ and $l_1 = l_2$, add inequality $ch_1 \neq ch_2 (\mod{r})$ to the system $\mathcal{S}$.
 \end{itemize}
 
 \begin{notice}
@@ -416,7 +414,7 @@ For each vertex $x \in A$:
 
 In figure \ref{neq_system_graph} the metagraph $G$ with for edges $e_1, e_2, e_3, e_4$ is shown. Weights of edges are variables $w_1, w_2, w_3, w_4$.
 
-\begin{figure}[H]
+\begin{figure}[!h]
     \centering
     \begin{picture}(150,200)
         \put(75,165){\thicklines{\circle*{5}}}
@@ -571,7 +569,7 @@ Variable $w_4$ can not be equal to $0, 1$ and $-1$ since they violate the last i
 
 This system does not allow $r$ to be $1, 2, 3$ and $4$, thus the least possible value of $r$ is $5$. 5-expansion of metagraph $G$ considered in figure \ref{neq_system_graph} with assigned weights, is shown in figure \ref{neq_system_res}. Girth of this graph is equal to $6$, and one of the cycles with length $6$ is marked in bold.
 
-\begin{figure}[H]
+\begin{figure}[!h]
     \centering
     \begin{picture}(380,200)
         \put(50,165){\thicklines{\circle*{5}}}
@@ -648,7 +646,7 @@ Let us consider metagraphs that are complete bipartite graphs.
 
 Example of complete bipartite graph is shown in figure \ref{full_graph_3_by_9}. 
 
-\begin{figure}[H]
+\begin{figure}[!h]
     \centering
     \begin{picture}(300,200)
         \put(65,165){\thicklines{\circle*{5}}}
@@ -706,7 +704,7 @@ Example of complete bipartite graph is shown in figure \ref{full_graph_3_by_9}.
     Consider metagraph $G$ shown in figure \ref{full_graph_2_by_3}. Let $\mu = (e_1, e_4, e_5, e_2, e_3, e_6, e_4, e_1, e_2, e_5, e_6, e_3)$ be a cycle. Its characteristic is euqal to $w_1 - w_4 + w_5 - w_2 + w_3 - w_6 + w_4 - w_1 + w_2 - w_5 + w_6 - w_3 = 0$. Therefore, paths that correspond to $\mu$ are cycles with length of $12$ on r-expansions of $G$.
 \end{notice}
 
-\begin{figure}[H]
+\begin{figure}[!h]
     \centering
     \begin{picture}(200,200)
         \put(65,165){\thicklines{\circle*{5}}}
@@ -808,7 +806,7 @@ Build a (2,3)-regular complete metagraph. It has 2 control and 3 informational v
 
 Bipartite graph with girth $8$ build with algorithm 2 is shown in figure \ref{be_not_afraid}. It has 6 control and 9 informational vertices. Control vertices are located in the inner circle and informational on the outer one. Vertices are grouped by their corresponding vertex in metagraph.
 
-\begin{figure}[H]
+\begin{figure}[!h]
     \centering
     \includegraphics[scale=0.2]{graph_2.png}
     \caption{ (2,3)-regular bipartite graph with girth of 8. }
@@ -817,7 +815,7 @@ Bipartite graph with girth $8$ build with algorithm 2 is shown in figure \ref{be
 
 Bipartite graph with girth $14$ is shown in figure \ref{be_not_afraid_2}. It has 42 control and 63 informational vertices.
 
-\begin{figure}[H]
+\begin{figure}[!h]
     \centering
     \includegraphics[scale=0.2]{graph_3.png}
     \caption{ (2,3)-regular bipartite graph with girth of 14. }
@@ -836,57 +834,92 @@ These algorithms and theorems might in future be generalized for any graphs. Gen
 \section{Literature.}
 
 % Список литературы: ~15 штук
+% Брать ссылки из цитат
+% Все цитаты привести к правильному виду
 
 \begin{thebibliography}{0}
 
+% 1
 \bibitem{zemor}
 G. Zémor, On Expander Codes, IEEE Trans. on Information theory, IT-47
 No 2, (2001) pp. 835–837.
   
+% 2
 \bibitem{johnson}
 S.\,J. Johnson,
 Introducing Low-Density Parity-Check Codes.
 ~-- University of Newcastle, Australia, 2006.
 
+% 3
 \bibitem{gallager}
 R.\,G. Gallager,
 Low-density parity-check codes
 ~-- IRE Transactions on Information Theory, 1962.
 
+% 4
 \bibitem{protographs}
 J. Thorpe,
 Low-density parity-check (LDPC) codes constructed from protographs.
 ~-- JPL, IPN Progress Rep., Aug. 2003, vol. 42–154.
 
+% 5
 \bibitem{skorohodov_reachability_problem}
 Skorokhodov V.A. Generalization of the Reachability Problem on Directed Graphs
 ~-- Mathematics and Statistics, Vol. 8, No. 6, pp. 699 - 704, 2020. DOI: 10.13189/ms.2020.080610
 
+% 6
 \bibitem{tutte_graph_definition}
 W.T. Tutte, Graph Theory
 ~-- % https://books.google.rs/books?id=uTGhooU37h4C&printsec=frontcover#v=onepage&q&f=false
 Chapter 1, page 1
 
-%% https://errorcorrectionzoo.org/
-
+% 7
 \bibitem{margulis_construction}
 G. A. MARGULIS EXPLICIT CONSTRUCTIONS OF GRAPHS WITHOUT SHORT CYCLES AND LOW DENSITY CODES 
 %% https://sci-hub.se/10.1007/bf02579283
 
-
+% 8
 \bibitem{imrich_construction}
 Imrich, W. (1984). Explicit construction of regular graphs without small cycles
 %% https://sci-hub.se/10.1007/bf02579157
 
-
+% 9
 %% Критика метода Маргулиса
 \bibitem{margulis_critique}
 David J.C. MacKay, Michael S. Postol, Weaknesses of Margulis and Ramanujan–Margulis Low-Density Parity-Check Codes
 % https://www.inference.org.uk/mackay/margulis.pdf
 
+% ??
+
+% 10
+\bibitem{ldpc_encoding}
+T. J. Richardson and R. L. Urbanke, “Efficient encoding of low-density parity-check codes”, IEEE Transactions on Information Theory 47, 638 (2001)
+
+% 11
+\bibitem{algebraic_aproach_to_sc_ldpc}
+A. Beemer, S. Habib, C. A. Kelley, and J. Kliewer, “A Generalized Algebraic Approach to Optimizing SC-LDPC Codes”. (2017)
+% https://web.njit.edu/~jkliewer/wp/paper/BHKK_Allerton17.pdf
+
+% 12
+\bibitem{lifts_of_graphs}
+C. A. Kelley, “On codes designed via algebraic lifts of graphs,”
+% https://typeset.io/pdf/on-codes-designed-via-algebraic-lifts-of-graphs-34h5sq5koc.pdf
+
+% 13
+\bibitem{quantum_error_correction}
+G. Zémor, “On Cayley Graphs, Surface Codes, and the Limits of Homological Coding for Quantum Error Correction”
+% https://www.researchgate.net/publication/220776025_On_Cayley_Graphs_Surface_Codes_and_the_Limits_of_Homological_Coding_for_Quantum_Error_Correction
+
+% 14
+\bibitem{vasic_combinatorial_construction}
+B. Vasic, Combinatorial Constructions of Low-Density Parity-Check Codes for Iterative Decoding
+% https://repository.arizona.edu/bitstream/handle/10150/641965/Combinatorial%20Constructions%20of%20Low-DensityParity-Check%20Codes%20for%20Iterative%20Decoding.pdf;jsessionid=9F016719B821C7D7CEBB9C48D7B37CB1?sequence=1
+
+
+%% https://errorcorrectionzoo.org/
+
 
 %% Discard
-
 
 % \bibitem{metagraphs_and_applications}
 % A. Basu, R.W. Blanning. Mategraphs and Their Applications
