@@ -23,14 +23,17 @@
 {\medskip}
 
 \begin{document}
+\shorttitle{Metagraph approach for construction of an (m, n)-regular bipartite graph with a given girth}
 
 \renewcommand{\mod}[1]{\textrm{mod}\ #1}
 
 \section{Introduction}
 
-Many modern algorithms of data encoding use bipartite graphs with specific properties for error correction during data transmission over noise channels, e.g. Low Density Parity Check Codes \cite{LDPC}. 
+Many modern algorithms of data encoding use bipartite graphs with specific properties for error correction during data transmission over noise channels, e.g. Low Density Parity Check Codes \cite{johnson} \cite{ldpc_encoding}. 
 
-Methods of construction for such bipartite graphs are divided in two main categories: methods, based on random permutations of different graphs, e.g. brute-force search \cite{bruteforce} of pseudo-random permutation of matrices \cite{gallager}; and structured methods which build graphs based on fixed predefined structure, e.g. methods that use protographs \cite{protographs}.
+% Нужна ли цитата для переборного алгоритма, а то она потерялась
+Methods of construction for such bipartite graphs are divided in two main categories: methods, based on random permutations of different graphs, e.g. brute-force search of pseudo-random permutation of matrices \cite{gallager}; and structured methods which build graphs based on fixed predefined structure, e.g. methods that use protographs \cite{protographs}. As well as various other methods \cite{margulis_construction} \cite{margulis_critique} \cite{imrich_construction} \cite{algebraic_aproach_to_sc_ldpc} \cite{lifts_of_graphs} \cite{vasic_combinatorial_construction} \cite{Kim2002ExplicitCO}.
+% Разбить цитаты на группы: матричные/графовые отдельно
 
 Protographs are Tanner graphs, typically with relatively small number of vertices. They serve as blueprints for constructing larger LDPC-codes. Larger graph is obtained by "copy-and-permutate" operation: first protograph is copied several times, after that endpoints of edges are swapped so that subgraphs become interconnected. The performance of the larger graph can be predicted by analyzing the protograph. 
 
@@ -878,18 +881,16 @@ Chapter 1, page 1
 G. A. MARGULIS EXPLICIT CONSTRUCTIONS OF GRAPHS WITHOUT SHORT CYCLES AND LOW DENSITY CODES 
 %% https://sci-hub.se/10.1007/bf02579283
 
-% 8
-\bibitem{imrich_construction}
-Imrich, W. (1984). Explicit construction of regular graphs without small cycles
-%% https://sci-hub.se/10.1007/bf02579157
-
 % 9
 %% Критика метода Маргулиса
 \bibitem{margulis_critique}
 David J.C. MacKay, Michael S. Postol, Weaknesses of Margulis and Ramanujan–Margulis Low-Density Parity-Check Codes
 % https://www.inference.org.uk/mackay/margulis.pdf
 
-% ??
+% 8
+\bibitem{imrich_construction}
+Imrich, W. (1984). Explicit construction of regular graphs without small cycles
+%% https://sci-hub.se/10.1007/bf02579157
 
 % 10
 \bibitem{ldpc_encoding}
@@ -906,20 +907,26 @@ C. A. Kelley, “On codes designed via algebraic lifts of graphs,”
 % https://typeset.io/pdf/on-codes-designed-via-algebraic-lifts-of-graphs-34h5sq5koc.pdf
 
 % 13
-\bibitem{quantum_error_correction}
-G. Zémor, “On Cayley Graphs, Surface Codes, and the Limits of Homological Coding for Quantum Error Correction”
-% https://www.researchgate.net/publication/220776025_On_Cayley_Graphs_Surface_Codes_and_the_Limits_of_Homological_Coding_for_Quantum_Error_Correction
-
-% 14
 \bibitem{vasic_combinatorial_construction}
 B. Vasic, Combinatorial Constructions of Low-Density Parity-Check Codes for Iterative Decoding
 % https://repository.arizona.edu/bitstream/handle/10150/641965/Combinatorial%20Constructions%20of%20Low-DensityParity-Check%20Codes%20for%20Iterative%20Decoding.pdf;jsessionid=9F016719B821C7D7CEBB9C48D7B37CB1?sequence=1
 
+%14
+\bibitem{Kim2002ExplicitCO}
+Jon-Lark Kim, Uri N. Peled. Irina G. Perepelitsa. Vera Pless, Explicit Construction of Families of LDPC Codes with Girth at Least Six, 2002
+%https://homepages.math.uic.edu/~pless/preprint/allerton.pdf
 
 %% https://errorcorrectionzoo.org/
 
 
 %% Discard
+
+% 13
+
+% Слишком общо, но можно по ссылкам пройтись
+% \bibitem{quantum_error_correction}
+% G. Zémor, “On Cayley Graphs, Surface Codes, and the Limits of Homological Coding for Quantum Error Correction”
+% https://www.researchgate.net/publication/220776025_On_Cayley_Graphs_Surface_Codes_and_the_Limits_of_Homological_Coding_for_Quantum_Error_Correction
 
 % \bibitem{metagraphs_and_applications}
 % A. Basu, R.W. Blanning. Mategraphs and Their Applications
