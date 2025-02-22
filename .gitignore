@@ -296,3 +296,5 @@ __latexindent_temp.tex
 *.kra
 *.kra~
 els-cas-templates
+
+target/
