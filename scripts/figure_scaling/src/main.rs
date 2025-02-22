@@ -14,8 +14,8 @@ fn read_lines(filename: &str) -> Vec<String> {
 }
 
 const FNAME: &str = "../../paper-en.tex";
-const NEW_HEIGHT: f64 = 70.0;
-const NEW_PADDING: f64 = 20.0;
+const NEW_HEIGHT: f64 = 100.0;
+const NEW_PADDING: f64 = 5.0;
 
 struct FileParser {
     file: Vec<String>,
@@ -83,7 +83,6 @@ impl FileParser {
             let l = self.current_line().trim_start().to_owned();
 
             if l.starts_with("\\end{picture}") {
-                self.pos += 1;
                 break;
             }
 
@@ -137,14 +136,14 @@ impl FileParser {
                     max_x = x.max(max_x);
                     max_y = y.max(max_y);
                 }
-                Item::Blank(_, _) => println!("{i:?}"),
+                Item::Blank(_, _) => (), // println!("{i:?}"),
             }
         }
 
         let aspect = NEW_HEIGHT / (max_y - min_y);
 
-        let width = (max_x - min_x) * aspect + NEW_PADDING * 2.0;
-        let height = NEW_HEIGHT + NEW_PADDING * 2.0;
+        let width = ((max_x - min_x) * aspect + NEW_PADDING * 2.0) as usize;
+        let height = (NEW_HEIGHT + NEW_PADDING * 2.0) as usize;
 
         let xx = |x: f64| ((x - min_x) * aspect + NEW_PADDING) as usize;
         let yy = |y: f64| ((y - min_y) * aspect + NEW_PADDING) as usize;
@@ -169,7 +168,7 @@ impl FileParser {
                 Item::Blank(_, s) => self.emit(s),
             }
         }
-        self.emit("    \\end{{picture}}")
+        self.emit("    \\end{picture}")
     }
 }
 
