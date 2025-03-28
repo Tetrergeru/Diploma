@@ -1,11 +1,1 @@
-Many modern algorithms of data encoding use bipartite graphs with great girth for error correction during data transmission over noise channels.
-Common approaches to construction of such graphs include methods based on random permutation of matrices, structured methods based on predetermined structures as well as various other methods. 
-Many of these methods can not reliably produce bipartite graphs with girth greater than 12.
-
-We are proposing an algorithm that allows the constrcuction of bipartite graphs with any given girth.
-We use special subset of graphs called metagraphs to produce systems of inequalities.
-The solution to these systems then can be applied to metagraph to construct a new graph with greater girth.
-The constructed graph can be later used as a metagraph in the same process.
-
-It was proven that any system of inequalities produced in this recursive process has a solution.
-And that using such an algorithm we can construct (m,n)-regular bipartite graph with any given girth. 
+In this paper the problem of construction of regular bipartite graphs with great girth is considered. To solve this problem the special subset of graphs called metagraphs is introduced. Metagraph is a weighted graph for which an operation of expansion that depends on edge weights is specified. The required graph is one of the expansions of the metagraph. Theorems on correspondence between paths and cycles on metagraphs and their expansions are proved. To construct the required graphs the approach with finding of edge weights on metagraph by solving the system of inequalities constructed using the metagraph. The theorem on existence of a solution for any such system is proved. The tight upper bound of expansion graph girth is given. The algorithm that constructs bipartite graphs with any given girth is proposed.
