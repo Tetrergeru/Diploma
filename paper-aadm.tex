@@ -32,7 +32,7 @@
 
 \textwidth 28cc
 
-\markboth{{\small\rm \hfill O.V. Arutyunov, V.A. Skorokhodov - header
+\markboth{{\small\rm \hfill O.V. Arutyunov, V.A. Skorokhodov
 \hfill}\hspace{-\textwidth}%
 \underline{${{}_{}}_{}$\hspace{\textwidth}}}
 {\underline{${{}_{}}_{}$\hspace{\textwidth}}\hspace{-\textwidth}%
@@ -48,8 +48,6 @@
 \parindent 2cc
 
 \begin{document}
-
-% Your \newcommands below (if there are any):
 
 \oddsidemargin 16.5mm
 \evensidemargin 16.5mm
@@ -86,20 +84,8 @@
 
 In this paper the problem of construction of regular bipartite graphs with great girth is considered. To solve this problem the special subset of graphs called metagraphs is introduced. Metagraph is a weighted graph for which an operation of expansion that depends on edge weights is specified. The required graph is one of the expansions of the metagraph. Theorems on correspondence between paths and cycles on metagraphs and their expansions are proved. To construct the required graphs the approach with finding of edge weights on metagraph by solving the system of inequalities constructed using the metagraph. The theorem on existence of a solution for any such system is proved. The tight upper bound of expansion graph girth is given. The algorithm that constructs bipartite graphs with any given girth is proposed.
 
-%Avoid citations in the  abstract, but if they are necessary, do not use labels from the
-%main body of the article. For example, instead of  writing "formula (2)" , you
-%should reproduce formula (2), or describe it in words. Instead of writing
-%"the result  obtained in [1]" , you should write "the result obtained in
-%{\sc J. A. Baker:}  {\it Isometries in normed spaces,}
-%Amer. Math. Monthly {\bf 78} (1971), 655--658".
-
 }}
 \end{center}
-
-% The paper should have at least two sections
-
-%TODO: Сделать секции как в шаблоне
-
 
 % \section{Introduction}
 \vspace{1.5cc}
@@ -108,9 +94,8 @@ In this paper the problem of construction of regular bipartite graphs with great
 
 Many modern algorithms of data encoding use bipartite graphs with specific properties for error correction during data transmission over noise channels, e.g. Low Density Parity Check Codes \cite{johnson} \cite{ldpc_encoding}. 
 
-% Нужна ли цитата для переборного алгоритма, а то она потерялась
-Methods of construction for such bipartite graphs are divided in two main categories: methods, based on random permutations of different graphs, e.g. brute-force search of pseudo-random permutation of matrices \cite{gallager}; and structured methods which build graphs based on fixed predefined structure, e.g. methods that use protographs \cite{protographs}. As well as various other methods \cite{margulis_construction} \cite{margulis_critique} \cite{imrich_construction} \cite{algebraic_aproach_to_sc_ldpc} \cite{lifts_of_graphs} \cite{vasic_combinatorial_construction} \cite{Kim2002ExplicitCO}.
-% Разбить цитаты на группы: матричные/графовые отдельно
+Methods of construction for such bipartite graphs are divided in two main categories: methods, based on random permutations of different graphs, e.g. brute-force search of pseudo-random permutation of matrices \cite{gallager}; and structured methods which build graphs based on fixed predefined structure, e.g. methods that use protographs \cite{protographs}. As well as various other methods
+\cite{algebraic_aproach_to_sc_ldpc, imrich_construction, lifts_of_graphs, Kim2002ExplicitCO, margulis_critique, margulis_construction, vasic_combinatorial_construction}.
 
 Protographs are Tanner graphs, typically with relatively small number of vertices. They serve as blueprints for constructing larger LDPC-codes. Larger graph is obtained by "copy-and-permutate" operation: first protograph is copied several times, after that endpoints of edges are swapped so that subgraphs become interconnected. The performance of the larger graph can be predicted by analyzing the protograph. 
 
@@ -141,10 +126,6 @@ The following definitions will be used onwards. We will use the definition of a 
     \end{itemize}
 
 \end{definition}
-
-% Заменить path на walk или chain?
-% Поискать похожие статьи
-% Можно добавить замечание, что слово path "нам нравится больше" и поэтому мы оставляем его
 
 \begin{definition}
     Sequence of edges $\mu = (e_1, ..., e_d)$, such that $e_i \neq e_{i+1}$ for all $i < d$, is called a path with first vertex $v_0$ and last vertex $v_d$ on graph $G(V,E,f)$, if exists a sequence of vertices $(v_0, ..., v_d)$ such that $\forall i = 1,...,d:$ $(v_i, v_{i+1}) = f(e_i)$ or $(v_{i+1}, v_i) = f(e_i)$. 
@@ -200,7 +181,6 @@ Consider weighted bipartite graphs that can be used to build larger graphs with 
 
 Example \ref{image:2} shows metagraph  $G_1$ with three vertices and four edges.
 
-% Отмасштабировать все картинки
 \begin{figure}[!h]
     \centering
     \begin{picture}(100,110)
@@ -444,10 +424,7 @@ Theorems \ref{theorem_cycles} and \ref{theorem_wings} are direct corollaries of 
 {On graphs with given girth.}
 
 % help us __to__ build?
-
 Let $G(V, E, f, w)$ be a metagraph and $w(e_i) = w_i \; \forall i = 0, \dots, |E|$, where $w_i$ are variables that will help us build a graph with given girth.
-
-% Поискать, как в англоязычной литературе называют не равенства с \neq
 
 Since we have to build an expansion graph $G'$ with girth $g$, therefore for any cycle $\eta$ with length less than $g$ on metagraph $G$, assume inequality of the form $\chi(\eta) \neq 0$.
 
@@ -469,11 +446,8 @@ where $\mathcal{H}_G(g)$ is the set of all cycles on $G$ with length less then $
 \end{theorem}
 
 \begin{proof}
-    % exhausts?
     The construction of system \eqref{eqs:example} exhausts all cycles, hence the absence of a solution is equivalent to existence of a cycle with length less then $g$ on any expansion. Thus the existence of a solution for system \eqref{eqs:example} is equivalent to existence of an expansion with girth greater than $g$.
 \end{proof}
-
-% Добавить везде где надо (\mod{r})
 
 For a given metagraph $G$, system \eqref{eqs:example} can be built using the following algorithm.
 
@@ -582,7 +556,6 @@ Let us apply Algorithm 1 for metagraph $G$ and girth to be 6. The set of labels,
 {Solving systems of inequalities.}
 
 % Still ???
-
 Finding of the minimal solution for system \eqref{eqs:example}, is a computationally hard problem. It requires to enumerate all possible solutions and select the minimal one. Still, if system \eqref{eqs:example} has a solution then one of them can be found by the following algorithm.
 
 \textbf{Algorithm 2.}
@@ -621,7 +594,7 @@ Assign $w_1 = 0$. Recalculate considered system with assigned value. We get
     \label{eqs:cycle_search_neqs_1}
 \end{equation}
 
-Variable $w_2$ can not be equal to $0$ since it would violate inequality $- w_2 \neq 0$. Assign $w_2 = 1$. We obtain
+Variable $w_2$ can not be equal to $0$ since it would violate inequality $- w_2 \neq 0$. Assign $w_2 = 1$ in \eqref{eqs:cycle_search_neqs_1}. We obtain
 
 \begin{equation}
     \centering
@@ -638,7 +611,7 @@ Variable $w_2$ can not be equal to $0$ since it would violate inequality $- w_2 
     \label{eqs:cycle_search_neqs_2}
 \end{equation}
 
-Assigning $w_3 = 0$ similarly, we get
+Assigning $w_3 = 0$ in \eqref{eqs:cycle_search_neqs_2} similarly, we get
 
 \begin{equation}
     \centering
@@ -655,7 +628,7 @@ Assigning $w_3 = 0$ similarly, we get
     \label{eqs:cycle_search_neqs_3}
 \end{equation}
 
-Variable $w_4$ can not be equal to $0, 1$ and $-1$ since they violate the last inequalities. Assign $w_4 = 2$. We finally obtain
+Variable $w_4$ can not be equal to $0, 1$ and $-1$ since they violate the last inequalities. Assign $w_4 = 2$ in \eqref{eqs:cycle_search_neqs_3}. We finally obtain
 
 \begin{equation}
     \centering
@@ -672,7 +645,7 @@ Variable $w_4$ can not be equal to $0, 1$ and $-1$ since they violate the last i
     \label{eqs:cycle_search_neqs_4}
 \end{equation}
 
-This system does not allow $r$ to be $1, 2, 3$ and $4$, thus the least possible value of $r$ is $5$. 5-expansion of metagraph $G$ considered in figure \ref{neq_system_graph} with assigned weights, is shown in figure \ref{neq_system_res}. Girth of this graph is equal to $6$, and one of the cycles with length $6$ is marked in bold.
+Note that system \eqref{eqs:cycle_search_neqs_4} does not allow $r$ to be neither $1, 2, 3$ nor $4$, thus the least possible value of $r$ is $5$. 5-expansion of metagraph $G$ considered in figure \ref{neq_system_graph} with assigned weights, is shown in figure \ref{neq_system_res}. Girth of this graph is equal to $6$, and one of the cycles with length $6$ is marked in bold.
 
 \begin{figure}[!h]
     \centering
@@ -742,11 +715,11 @@ This system does not allow $r$ to be $1, 2, 3$ and $4$, thus the least possible 
 {On selection of structure of metagraphs.}
 
 In previous section we showed a method of finding weights, that allow us build metagraph expansions with given girth.
-But we have not suggested a way to select a structure of a metagraph such that it would be possible to find such weights, i.e. such that system (1) built by Algorithm 1 is non-contradicting.
+But we have not suggested a way to select a structure of a metagraph such that it would be possible to find such weights, i.e. such that system \eqref{eqs:example} built by Algorithm 1 is non-contradicting.
 
 % Какое-то странное замечание
 \begin{notice}
-    Let us sequentially apply Algorithm 1 to $G$ with target girths of $4, 6, \dots, 2n$, where $2n$ is the first number for which algorithm couldn't build a solution. Then girth of metagraph $G$ is $2n - 2$.
+    Let us sequentially apply Algorithm 1 to metagraph $G$ with target girths of $4, 6, \dots, 2n$, where $2n$ is the first number for which algorithm couldn't build a solution. Then maximal girth of metagraph $G$ expansions is $2n - 2$.
 \end{notice}
 
 Let us consider metagraphs that are complete bipartite graphs.
@@ -850,8 +823,6 @@ Example of complete bipartite graph is shown in figure \ref{full_graph_3_by_9}.
 
     2. the first and the last edges of $\eta$ do not belong to $\mu$.
 
-    % Как-то надо бы переделать тета-граф, можно посмотреть в книжке Зыкова, как он определяет графы
-    % Корзинка? Сумочка
     Such a graph is called $(\mu + \eta)$-graph.
 \end{definition}
 
@@ -952,74 +923,71 @@ These algorithms and theorems might in future be generalized for any graphs. Gen
 
 \begin{thebibliography}{1}
 
-%TODO: Proper references
-
 %Fill the list of references in the alphabetical order here.
 
-% 1\
-\bibitem{zemor}
-{\small {\sc G. Zémor:} {\it On Expander Codes.} IEEE Trans. on Information theory, IT-47 No 2, (2001), 835--837.}
-  
-% 2
-\bibitem{johnson}
-{\small {\sc Johnson, Sarah: }{\it Introducing Low-Density Parity-Check Codes.} 2008.}
+% 11
+\bibitem{algebraic_aproach_to_sc_ldpc}
+{\small {\sc A. Beemer, Habib, S., Kelley, C. A., Kliewer, J.: }{\it A generalized algebraic approach to optimizing SC-LDPC codes.} In 55th Annual Allerton Conference on Communication, Control, and Computing, Allerton 2017 (pp. 672-679).Institute of Electrical and Electronics Engineers Inc. doi:10.1109/ALLERTON.2017.8262802 }
+% https://web.njit.edu/~jkliewer/wp/paper/BHKK_Allerton17.pdf
 
 % 3
 \bibitem{gallager}
 {\small {\sc R. Gallager:} {\it Low-density parity-check codes.} IRE Transactions on Information Theory, vol. 8, No. 1, (1962), 21--28, doi: 10.1109/TIT.1962.1057683}
 
-% 4
-\bibitem{protographs}
-{\small {\sc J. Thorpe:} {\it Low-density parity-check (LDPC) codes constructed from protographs.} JPL, IPN Progress Rep. vol. 42–154, (Aug. 2003)}
-
-% 5
-\bibitem{skorohodov_reachability_problem}
- {\small {\sc Skorokhodov V.A.: }{\it Generalization of the Reachability Problem on Directed Graphs.} Mathematics and Statistics, Vol. 8, No. 6, pp. 699 - 704, 2020. DOI: 10.13189/ms.2020.080610.}
-
-% 6
-\bibitem{tutte_graph_definition}
-{\small {\sc W.T. Tutte: }{\it Graph Theory.} Cambridge University Press, Cambridge, 2001, 360 pp.}
-% https://books.google.rs/books?id=uTGhooU37h4C&printsec=frontcover#v=onepage&q&f=false
-
-% 7
-\bibitem{margulis_construction}
-{\small {\sc Margulis, G. A.: }{\it Explicit constructions of graphs without short cycles and low density codes.} Combinatorica, 2(1), 71–78. (1982) doi:10.1007/bf02579283}
-%% https://sci-hub.se/10.1007/bf02579283
-
-% 8
-%% Критика метода Маргулиса
-\bibitem{margulis_critique}
-{\small {\sc David J.C. MacKay, Michael S. Postol: }{\it Weaknesses of Margulis and Ramanujan-Margulis Low-Density Parity-Check Codes.} Electronic Notes in Theoretical Computer Science, Volume 74, 2003, Pages 97-104, ISSN 1571-0661, doi:10.1016/S1571-0661(04)80768-0}
-% https://www.inference.org.uk/mackay/margulis.pdf
-
 % 9
 \bibitem{imrich_construction}
-{\small {\sc Imrich, W.: }{\it Explicit construction of regular graphs without small cycles.} Combinatorica, 4(1), 53–59. (1984) doi:10.1007/bf02579157 } 
+{\small {\sc W. Imrich: }{\it Explicit construction of regular graphs without small cycles.} Combinatorica, 4(1), 53–59. (1984) doi:10.1007/bf02579157 } 
 %% https://sci-hub.se/10.1007/bf02579157
 
-% 10
-\bibitem{ldpc_encoding}
-{\small {\sc T. J. Richardson and R. L. Urbanke: }{\it Efficient encoding of low-density parity-check codes.} IEEE Transactions on Information Theory, vol. 47, no. 2, pp. 638-656, Feb 2001, doi: 10.1109/18.910579 }
-
-% 11
-\bibitem{algebraic_aproach_to_sc_ldpc}
-{\small {\sc Beemer, A., Habib, S., Kelley, C. A., Kliewer, J.: }{\it A generalized algebraic approach to optimizing SC-LDPC codes.} In 55th Annual Allerton Conference on Communication, Control, and Computing, Allerton 2017 (pp. 672-679).Institute of Electrical and Electronics Engineers Inc. doi:10.1109/ALLERTON.2017.8262802 }
-% https://web.njit.edu/~jkliewer/wp/paper/BHKK_Allerton17.pdf
+% 2
+\bibitem{johnson}
+{\small {\sc S. Johnson: }{\it Introducing Low-Density Parity-Check Codes.} 2008.}
 
 % 12
 \bibitem{lifts_of_graphs}
 {\small {\sc C. A. Kelley: }{\it On codes designed via algebraic lifts of graphs.} 2008 46th Annual Allerton Conference on Communication, Control, and Computing, Monticello, IL, USA, 2008, pp. 1254-1261, doi: 10.1109/ALLERTON.2008.4797704.}
 % https://typeset.io/pdf/on-codes-designed-via-algebraic-lifts-of-graphs-34h5sq5koc.pdf
 
-% 13
-\bibitem{vasic_combinatorial_construction}
-
-{\small {\sc B. Vasic and O. Milenkovic: }{\it Combinatorial constructions of low-density parity-check codes for iterative decoding.} in IEEE Transactions on Information Theory, vol. 50, no. 6, pp. 1156-1176, June 2004, doi: 10.1109/TIT.2004.828066. }
-% https://repository.arizona.edu/bitstream/handle/10150/641965/Combinatorial%20Constructions%20of%20Low-DensityParity-Check%20Codes%20for%20Iterative%20Decoding.pdf;jsessionid=9F016719B821C7D7CEBB9C48D7B37CB1?sequence=1
-
 %14
 \bibitem{Kim2002ExplicitCO}
-{\small {\sc Kim, Jon-Lark, Uri N. Peled, Irina G. Perepelitsa and Vera Pless: }{\it “Explicit Construction of Families of LDPC Codes with Girth at Least Six.} Proceedings of the 40th Allerton Conference on Communication, Control and  Computing, UIUC, Oct. 2002}
+{\small {\sc J.-L. Kim, N.P. Uri , I.G. Perepelitsa, V. Pless: }{\it “Explicit Construction of Families of LDPC Codes with Girth at Least Six.} Proceedings of the 40th Allerton Conference on Communication, Control and  Computing, UIUC, Oct. 2002}
+
+% 8
+%% Критика метода Маргулиса
+\bibitem{margulis_critique}
+{\small {\sc D.J.C. MacKay, M.S. Postol: }{\it Weaknesses of Margulis and Ramanujan-Margulis Low-Density Parity-Check Codes.} Electronic Notes in Theoretical Computer Science, Volume 74, 2003, Pages 97-104, ISSN 1571-0661, doi:10.1016/S1571-0661(04)80768-0}
+% https://www.inference.org.uk/mackay/margulis.pdf
+
+% 7
+\bibitem{margulis_construction}
+{\small {\sc G. A. Margulis: }{\it Explicit constructions of graphs without short cycles and low density codes.} Combinatorica, 2(1), 71–78. (1982) doi:10.1007/bf02579283}
+%% https://sci-hub.se/10.1007/bf02579283
+
+% 10
+\bibitem{ldpc_encoding}
+{\small {\sc T. J. Richardson, R. L. Urbanke: }{\it Efficient encoding of low-density parity-check codes.} IEEE Transactions on Information Theory, vol. 47, no. 2, pp. 638-656, Feb 2001, doi: 10.1109/18.910579 }
+
+% 5
+\bibitem{skorohodov_reachability_problem}
+{\small {\sc V.A. Skorokhodov: }{\it Generalization of the Reachability Problem on Directed Graphs.} Mathematics and Statistics, Vol. 8, No. 6, pp. 699 - 704, 2020. DOI: 10.13189/ms.2020.080610.}
+
+% 4
+\bibitem{protographs}
+{\small {\sc J. Thorpe:} {\it Low-density parity-check (LDPC) codes constructed from protographs.} JPL, IPN Progress Rep. vol. 42–154, (Aug. 2003)}
+
+% 6
+\bibitem{tutte_graph_definition}
+{\small {\sc W.T. Tutte: }{\it Graph Theory.} Cambridge University Press, Cambridge, 2001, 360 pp.}
+% https://books.google.rs/books?id=uTGhooU37h4C&printsec=frontcover#v=onepage&q&f=false
+
+% 13
+\bibitem{vasic_combinatorial_construction}
+{\small {\sc B. Vasic, O. Milenkovic: }{\it Combinatorial constructions of low-density parity-check codes for iterative decoding.} in IEEE Transactions on Information Theory, vol. 50, no. 6, pp. 1156-1176, June 2004, doi: 10.1109/TIT.2004.828066. }
+% https://repository.arizona.edu/bitstream/handle/10150/641965/Combinatorial%20Constructions%20of%20Low-DensityParity-Check%20Codes%20for%20Iterative%20Decoding.pdf;jsessionid=9F016719B821C7D7CEBB9C48D7B37CB1?sequence=1
+
+% 1\
+\bibitem{zemor}
+{\small {\sc G. Zémor:} {\it On Expander Codes.} IEEE Trans. on Information theory, IT-47 No 2, (2001), 835--837.}
 
 \end{thebibliography}
 
