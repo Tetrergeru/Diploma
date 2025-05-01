@@ -82,7 +82,7 @@
 \vspace{1cc}
 \parbox{24cc}{{\small
 
-In this paper the problem of construction of regular bipartite graphs with great girth is considered. To solve this problem the special subset of graphs called metagraphs is introduced. Metagraph is a weighted graph for which an operation of expansion that depends on edge weights is specified. The required graph is one of the expansions of the metagraph. Theorems on correspondence between paths and cycles on metagraphs and their expansions are proved. To construct the required graphs the approach with finding of edge weights on metagraph by solving the system of inequalities constructed using the metagraph. The theorem on existence of a solution for any such system is proved. The tight upper bound of expansion graph girth is given. The algorithm that constructs bipartite graphs with any given girth is proposed.
+In this paper, the problem of construction of regular bipartite graphs with great girth is considered. To solve this problem, the special subset of graphs called metagraphs is introduced. Metagraph is a weighted graph for which an operation of expansion that depends on edge weights is specified. The required graph is one of the expansions of the metagraph. Theorems on correspondence between paths and cycles on metagraphs and their expansions are proved. To construct the required graphs, the approach with finding of edge weights on metagraph by solving the system of inequalities constructed using the metagraph. The theorem on existence of a solution for any such system is proved. The tight upper bound of expansion graph girth is given. The algorithm that constructs bipartite graphs with any given girth is proposed.
 
 }}
 \end{center}
@@ -94,14 +94,14 @@ In this paper the problem of construction of regular bipartite graphs with great
 
 Many modern algorithms of data encoding use bipartite graphs with specific properties for error correction during data transmission over noise channels, e.g. Low Density Parity Check Codes \cite{johnson} \cite{ldpc_encoding}. 
 
-Methods of construction for such bipartite graphs are divided in two main categories: methods, based on random permutations of different graphs, e.g. brute-force search of pseudo-random permutation of matrices \cite{gallager}; and structured methods which build graphs based on fixed predefined structure, e.g. methods that use protographs \cite{protographs}. As well as various other methods
+Methods of construction for such bipartite graphs are divided in two main categories: methods based on random permutations of different graphs, e.g. brute-force search of pseudo-random permutation of matrices \cite{gallager}; and structured methods which build graphs based on fixed predefined structure, e.g. methods that use protographs \cite{protographs}. As well as various other methods
 \cite{algebraic_aproach_to_sc_ldpc, imrich_construction, lifts_of_graphs, Kim2002ExplicitCO, margulis_critique, margulis_construction, vasic_combinatorial_construction}.
 
-Protographs are Tanner graphs, typically with relatively small number of vertices. They serve as blueprints for constructing larger LDPC-codes. Larger graph is obtained by "copy-and-permutate" operation: first protograph is copied several times, after that endpoints of edges are swapped so that subgraphs become interconnected. The performance of the larger graph can be predicted by analyzing the protograph. 
+Protographs are Tanner graphs, typically with relatively small number of vertices. They serve as blueprints for constructing larger LDPC-codes. A larger graph is obtained by "copy-and-permutate" operation: the first protograph is copied several times, after that endpoints of edges are swapped so that subgraphs become interconnected. The performance of the larger graph can be predicted by analyzing the protograph. 
 
-Parts in Tanner graph are called respectively subcode part and digit part. Digit vertices correspond to bits passed through the channel and subcode vertices to parity checks of adjacent variable vertices. LDPC Algorithm checks values of subcode vertices, and if the error is detected, recursively traverses adjacent vertices. Thus if error has occurred in vertex belonging to a cycle, it will accumulate when algorithm fully walks the cycle. Hence graphs without short cycles should be used.
+Parts in Tanner graph are called subcode part and digit part respectively. Digit vertices correspond to bits passed through the channel, and subcode vertices correspond to parity checks of adjacent variable vertices. LDPC Algorithm checks values of subcode vertices, and if an error is detected, recursively traverses adjacent vertices. Thus if error has occurred in vertex belonging to a cycle, it will accumulate when the algorithm fully walks the cycle. Hence graphs without short cycles should be used.
 
-In this article we propose a structural method for construction of bipartite graphs with any given girth by expanding metagraphs. The algorithm for selection of optimal weights for metagraphs is developed. Precise estimation of girth among all expansions of metagraph is given. Algorithm for iterative selection of metragraph structure is proposed.
+In this article, we propose a structural method for construction of bipartite graphs with any given girth by expanding metagraphs. The algorithm for selection of optimal weights for metagraphs is developed. Precise estimation of girth among all expansions of metagraph is given. An algorithm for iterative selection of metragraph structure is proposed.
 
 \end{section}
 
@@ -132,15 +132,15 @@ The following definitions will be used onwards. We will use the definition of a 
 \end{definition}
 
 \begin{notice}
-    Sometimes the distinction between walks, trails and paths is made, in this paper we decided to use word path for all such objects.
+    Sometimes the distinction between walks, trails and paths is made, in this paper we decided to use word the path for all such objects.
 \end{notice}
 
 \begin{definition}
-    A cycle is a path, for which the first and the last vertices are equal.
+    A cycle is a path for which the first and the last vertices are equal.
 \end{definition}
 
 \begin{definition}
-    Let $G$ be a graph. The girth of $G$ is the length of it's shortest cycle.
+    Let $G$ be a graph. The girth of $G$ is the length of its shortest cycle.
 \end{definition}
 
 \begin{notice}
@@ -179,7 +179,7 @@ Consider weighted bipartite graphs that can be used to build larger graphs with 
     Consider $G(V,E,f)$ a bipartite graph. A quadriple $G'(V,E,f,w)$ is called a metagraph, where $w: E \to \mathbb{Z}$ is a function mapping edges to their weights.
 \end{definition}
 
-Example \ref{image:2} shows metagraph  $G_1$ with three vertices and four edges.
+Example \ref{image:2} shows a metagraph  $G_1$ with three vertices and four edges.
 
 \begin{figure}[!h]
     \centering
@@ -205,12 +205,12 @@ Example \ref{image:2} shows metagraph  $G_1$ with three vertices and four edges.
         \bezier{300}(51,101)(64,58)(78,15)
         \put(59,45){$0$}
     \end{picture}
-    \caption{ Metagraph with edges weights of +1, 0, 0, -1. }
+    \caption{ The metagraph with edges weights of +1, 0, 0, -1. }
     \label{image:2}
 \end{figure}
 
 \begin{definition}
-    Let $r \in \mathbb{N}$, an $r$-expansion of metagraph $G(V,E,f,w)$ is a graph $G^{(r)}(V^{(r)}, E^{(r)}, f^{(r)})$, such that each vertex $v \in V$ corresponds to the set of vertices $ T^{(r)}(v) = \{ v^{(1)}, \dots, v^{(r)} \}$; each edge $e \in E$ corresponds to the set of edges $ T^{(r)}(e) =  \{ e^{(1)}, \dots, e^{(r)} \}$; and the incidence function is built according to the following rule: for each $e \in E$ such that $f(e) = (a, b)$, then $f^{(r)}(e^{(i)}) = (a^{(i)}, b^{(i + w(e) (\mod{r}))})$ $\forall i = 1, \dots, r$.
+    Let $r \in \mathbb{N}$, an $r$-expansion of metagraph $G(V,E,f,w)$ is a graph $G^{(r)}(V^{(r)}, E^{(r)}, f^{(r)})$ such that each vertex $v \in V$ corresponds to the set of vertices $ T^{(r)}(v) = \{ v^{(1)}, \dots, v^{(r)} \}$; each edge $e \in E$ corresponds to the set of edges $ T^{(r)}(e) =  \{ e^{(1)}, \dots, e^{(r)} \}$; and the incidence function is built according to the following rule: for each $e \in E$ such that $f(e) = (a, b)$, then $f^{(r)}(e^{(i)}) = (a^{(i)}, b^{(i + w(e) (\mod{r}))})$ $\forall i = 1, \dots, r$.
 \end{definition}
 
 \begin{notice}
@@ -221,7 +221,7 @@ Example \ref{image:2} shows metagraph  $G_1$ with three vertices and four edges.
     \]
 \end{notice}
 
-Example \ref{image:3} shows graph, built as a 4-expansion of metagraph $G_1$, shown in example \ref{image:2}.
+Example \ref{image:3} shows a graph built as a 4-expansion of the metagraph $G_1$, shown in the example \ref{image:2}.
 
 \begin{figure}[!h]
     \centering
@@ -277,7 +277,7 @@ Example \ref{image:3} shows graph, built as a 4-expansion of metagraph $G_1$, sh
         \bezier{700}(35,101)(148,58)(261,15)
         \bezier{700}(235,101)(121,58)(8,15)
     \end{picture}
-    \caption{ 4-expansion of metagraph $G_1$. }
+    \caption{ 4-expansion of the metagraph $G_1$. }
     \label{image:3}
 \end{figure}
 
@@ -294,12 +294,12 @@ Example \ref{image:3} shows graph, built as a 4-expansion of metagraph $G_1$, sh
 \end{definition}
 
 \begin{notice}
-    If some path is a cycle on metagraph $G$, then it's corresponding paths on $G^{(r)}$ might not be cycles. Such a case is demonstrated by the following example.
+    If some path is a cycle on metagraph $G$, then its corresponding paths on $G^{(r)}$ might not be cycles. Such a case is demonstrated by the following example.
 \end{notice}
 
 \textbf{Example 1.}
 
-Consider graph on figure \ref{metagraph_3_expansion}. Path $(e_1, e_2)$ is a cycle on metagraph, but none of it's corresponding paths  $\mu_1 = (e^{(1)}_1, e^{(1)}_2)$, $\mu_2 = (e^{(2)}_1, e^{(2)}_2)$, $\mu_3 = (e^{(3)}_1, e^{(3)}_2)$  on 3-expansion is a cycle. Notice that concatenation of these three paths $\mu = (e^{(1)}_1, e^{(1)}_2, e^{(2)}_1, e^{(2)}_2, e^{(3)}_1, e^{(3)}_2)$ is a cycle with length 6. Cycle $\mu$ corresponds to cycle $(e_1, e_2, e_1, e_2, e_1, e_2)$ on metagraph.
+Consider a graph in figure \ref{metagraph_3_expansion}. Path $(e_1, e_2)$ is a cycle on metagraph but none of its corresponding paths  $\mu_1 = (e^{(1)}_1, e^{(1)}_2)$, $\mu_2 = (e^{(2)}_1, e^{(2)}_2)$, $\mu_3 = (e^{(3)}_1, e^{(3)}_2)$  on 3-expansion is a cycle. Notice that concatenation of these three paths $\mu = (e^{(1)}_1, e^{(1)}_2, e^{(2)}_1, e^{(2)}_2, e^{(3)}_1, e^{(3)}_2)$ is a cycle with length 6. Cycle $\mu$ corresponds to cycle $(e_1, e_2, e_1, e_2, e_1, e_2)$ on metagraph.
 
 \begin{figure}[!h]
     \centering
@@ -377,7 +377,7 @@ It is clear that the following theorem holds.
 \end{theorem}
 
 \begin{theorem}[on last vertices of paths]\label{theorem_last_vertices}
-    Let $\eta = (e_1, ..., e_d)$ be a path on metagraph $G$ with first vertex $x$ and last vertex $y$. Let $\mu' = (e'_1, ..., e'_d)$ be one of it's corresponding paths on $G^{(r)}$ with first vertex $x^{(i)}$.
+    Let $\eta = (e_1, ..., e_d)$ be a path on metagraph $G$ with first vertex $x$ and last vertex $y$. Let $\mu' = (e'_1, ..., e'_d)$ be one of its corresponding paths on $G^{(r)}$ with first vertex $x^{(i)}$.
     
     Then the last vertex of $\mu'$ is $y^{(i + \chi(\eta) (\mod{r}))}$.
     
@@ -396,7 +396,7 @@ It is clear that the following theorem holds.
     
     \item Let for any $d \leq n$ the statement under the proof holds. We prove that it holds for $d = n + 1$.
 
-    Suppose $\eta' = (e_1, ..., e_{d - 1})$ is a path. Let us call $x$ the last vertex of path $\eta$. According to the supposition of induction the last vertices of it's corresponding paths on expansion are $x^{(i + \chi(\eta')(\mod{r}))}$.
+    Suppose $\eta' = (e_1, ..., e_{d - 1})$ is a path. Let us call $x$ the last vertex of path $\eta$. According to the supposition of induction the last vertices of its corresponding paths on expansion are $x^{(i + \chi(\eta')(\mod{r}))}$.
     
     If $x \in A$, then vertex $x^{(i + \chi(\eta')(\mod{r}))}$ is incident to the edge $f^{(r)}(e_d^{(i + \chi(\eta')(\mod{r}))}) = (x^{(i + \chi(\eta')(\mod{r}))}, y^{(i + \chi(\eta') + w(e_d) (\mod{r}))})$ hence the last vertex of the path $\mu_i$ is $y^{(i + \chi(\eta') + w(e_d) (\mod{r}))} = y^{(i + \chi(\mu) (\mod{r}))}$.
     
@@ -408,7 +408,7 @@ It is clear that the following theorem holds.
 Theorems \ref{theorem_cycles} and \ref{theorem_wings} are direct corollaries of theorem \ref{theorem_last_vertices}.
 
 \begin{theorem}[on cycles]\label{theorem_cycles}
-    Let $\eta$ be a cycle on metagaph. Then it's corresponding paths on the expansion are cycles iff $\chi(\eta) = 0 (\mod{r})$.
+    Let $\eta$ be a cycle on metagaph. Then its corresponding paths on the expansion are cycles iff $\chi(\eta) = 0 (\mod{r})$.
 \end{theorem}
 
 \begin{theorem}[on wings of cycles]\label{theorem_wings}
@@ -424,13 +424,13 @@ Theorems \ref{theorem_cycles} and \ref{theorem_wings} are direct corollaries of 
 {On graphs with given girth.}
 
 % help us __to__ build?
-Let $G(V, E, f, w)$ be a metagraph and $w(e_i) = w_i \; \forall i = 0, \dots, |E|$, where $w_i$ are variables that will help us build a graph with given girth.
+Let $G(V, E, f, w)$ be a metagraph and $w(e_i) = w_i \; \forall i = 0, \dots, |E|$, where $w_i$ are variables that will help us build a graph with a given girth.
 
 Since we have to build an expansion graph $G'$ with girth $g$, therefore for any cycle $\eta$ with length less than $g$ on metagraph $G$, assume inequality of the form $\chi(\eta) \neq 0$.
 
 \begin{theorem}
 
-Let $G$ be a metagraph. Then there exists an expansion of metagraph $G$ with girth equal to or greater than $g$ iff the following system of inequalities for a graph $G$ has a solution:
+Let $G$ be a metagraph. Then there exists an expansion of metagraph $G$ with a girth equal to or greater than $g$ iff the following system of inequalities for a graph $G$ has a solution:
 
 \begin{equation}
     \centering
@@ -484,7 +484,7 @@ For each vertex $x \in A$:
 
 \textbf{Example.}
 
-In figure \ref{neq_system_graph} the metagraph $G$ with for edges $e_1, e_2, e_3, e_4$ is shown. Weights of edges are variables $w_1, w_2, w_3, w_4$.
+In figure \ref{neq_system_graph}, the metagraph $G$ with for edges $e_1, e_2, e_3, e_4$ is shown. Weights of edges are variables $w_1, w_2, w_3, w_4$.
 
 \begin{figure}[!h]
     \centering
@@ -515,7 +515,7 @@ In figure \ref{neq_system_graph} the metagraph $G$ with for edges $e_1, e_2, e_3
 \end{figure}
 
 % "girth to be 6." ???
-Let us apply Algorithm 1 for metagraph $G$ and girth to be 6. The set of labels, constructed by the Algorithm is shown in Table \ref{cycle_search_table_neq}. The system of inequalities (2) is constructed using these labels.
+Let us apply Algorithm 1 for metagraph $G$ and girth to be 6. The set of labels constructed by the Algorithm is shown in Table \ref{cycle_search_table_neq}. The system of inequalities (2) is constructed using these labels.
 
 \begin{table}[H]
     \centering
@@ -556,22 +556,23 @@ Let us apply Algorithm 1 for metagraph $G$ and girth to be 6. The set of labels,
 {Solving systems of inequalities.}
 
 % Still ???
-Finding of the minimal solution for system \eqref{eqs:example}, is a computationally hard problem. It requires to enumerate all possible solutions and select the minimal one. Still, if system \eqref{eqs:example} has a solution then one of them can be found by the following algorithm.
+Finding of the minimal solution for system \eqref{eqs:example} is a computationally hard problem. It requires to enumerate all possible solutions and select the minimal one. Still, if system \eqref{eqs:example} has a solution, then one of them can be found by the following algorithm.
 
 \textbf{Algorithm 2.}
 
-At first consider system \eqref{eqs:example} without parameter $r$. Find a solution using the following steps
+At first, consider system \eqref{eqs:example} without parameter $r$. Find a solution using the following steps
 
 \begin{enumerate}
     \item Let $e$ be the number of variables in a system of inequalities.
-    \item If the system contains inequality $0 \neq 0$ then it has no solution, the algorithm halts.
+    \item If the system contains inequality $0 \neq 0$, then it has no solution, the algorithm halts.
     \item Select all inequalities of the form $a x_e + b \neq 0$. Denote the set of all such inequalities as $I$.
-    \item Let $v$ be a number such that $v \neq -b/a $ for each inequality $"a x_e + b \neq 0 (\mod{r})" \in I$. In case $I = \varnothing$ assign $v = 0$. Such a number can be found since $I$ is finite.
+    % TODO: кавычкам плохо
+    \item Let $v$ be a number such that $v \neq -b/a $ for each inequality $"a x_e + b \neq 0 (\mod{r})" \in I$. In case $I = \varnothing$, assign $v = 0$. Such a number can be found since $I$ is finite.
     \item Substitute value $v$ instead of variable $x_e$ in all inequalities and add equality $x_e = v$ to the solution. By $v$ selection conditions, none of inequalities will turn into $0 \neq 0$ by such a substitution. 
     \item If $e > 1$ assign $e = e - 1$ and return to step 3, otherwise the solution is found, proceed to calculation of parameter $r$.
 \end{enumerate}
 
-Substitute found solution to system \eqref{eqs:example}, denote the obtained system as $I_s$. All inequalities have form $a \neq 0 (\mod{r})$ where $r$ is an unknown parameter. Form of inequalities allow us to find it as $r = \max\limits_{"a \neq 0 (\mod{r})" \in I_s}\{ |a| \} + 1$.
+Substitute found solution to system \eqref{eqs:example}, denote the obtained system as $I_s$. All inequalities have form $a \neq 0 (\mod{r})$ where $r$ is an unknown parameter. Form of inequalities allows us to find it as $r = \max\limits_{"a \neq 0 (\mod{r})" \in I_s}\{ |a| \} + 1$.
 
 \textbf{Example.}
 
@@ -628,7 +629,7 @@ Assigning $w_3 = 0$ in \eqref{eqs:cycle_search_neqs_2} similarly, we get
     \label{eqs:cycle_search_neqs_3}
 \end{equation}
 
-Variable $w_4$ can not be equal to $0, 1$ and $-1$ since they violate the last inequalities. Assign $w_4 = 2$ in \eqref{eqs:cycle_search_neqs_3}. We finally obtain
+Variable $w_4$ can not be equal to $0, 1$ or $-1$ since they violate the last inequalities. Assign $w_4 = 2$ in \eqref{eqs:cycle_search_neqs_3}. We finally obtain
 
 \begin{equation}
     \centering
@@ -645,7 +646,7 @@ Variable $w_4$ can not be equal to $0, 1$ and $-1$ since they violate the last i
     \label{eqs:cycle_search_neqs_4}
 \end{equation}
 
-Note that system \eqref{eqs:cycle_search_neqs_4} does not allow $r$ to be neither $1, 2, 3$ nor $4$, thus the least possible value of $r$ is $5$. 5-expansion of metagraph $G$ considered in figure \ref{neq_system_graph} with assigned weights, is shown in figure \ref{neq_system_res}. Girth of this graph is equal to $6$, and one of the cycles with length $6$ is marked in bold.
+Note that system \eqref{eqs:cycle_search_neqs_4} does not allow $r$ to be neither $1, 2, 3$ nor $4$, thus the least possible value of $r$ is $5$. 5-expansion of metagraph $G$, considered in figure \ref{neq_system_graph} with assigned weights, is shown in figure \ref{neq_system_res}. Girth of this graph is equal to $6$, and one of the cycles with length $6$ is marked in bold.
 
 \begin{figure}[!h]
     \centering
@@ -714,7 +715,7 @@ Note that system \eqref{eqs:cycle_search_neqs_4} does not allow $r$ to be neithe
 \begin{section}
 {On selection of structure of metagraphs.}
 
-In previous section we showed a method of finding weights, that allow us build metagraph expansions with given girth.
+In previous section we showed a method of finding weights that allows us to build metagraph expansions with given girth.
 But we have not suggested a way to select a structure of a metagraph such that it would be possible to find such weights, i.e. such that system \eqref{eqs:example} built by Algorithm 1 is non-contradicting.
 
 % Какое-то странное замечание
@@ -860,9 +861,9 @@ Let $G'$ be a bipartite graph, and $\theta = \min\limits_{H \in \Phi(G')} \{ |H|
 
 Consider set of cycles $\mathcal{H}_G$ on metagraph $G'$ with length less then $2 \theta$ such that for each cycle $c \in C$ there exists an expansions of $G'$ on which $c$ corresponds to non-cycles only. 
 
-We can use Algorithms 1 and 2 to select weights $w$ and parameter $r$ such that all cycles from $\mathcal{H}_G$ correspond to non-cycles on all expansions determined by pairs $(w, r)$. Thus we can consider only expansions, where cycles from $\mathcal{H}_G$ are broken. Therefore, consider only cycles on metagraph which correspond to cycles on all expansions. Note that all expansions determined by pairs $(w, r)$ have similar girth. Therefore. we can consider the shortest of such cycles only.
+We can use Algorithms 1 and 2 to select weights $w$ and parameter $r$ such that all cycles from $\mathcal{H}_G$ correspond to non-cycles on all expansions determined by pairs $(w, r)$. Thus we can consider only expansions where cycles from $\mathcal{H}_G$ are broken. Therefore, consider only cycles on metagraph which correspond to cycles on all expansions. Note that all expansions determined by pairs $(w, r)$ have similar girth. Therefore we can consider the shortest of such cycles only.
 
-If a cycle on metagraph corresponds to cycles on all expansions, then its characteristic is $0$ independent of the selected weights. Hence this cycle walks through each of its edges the same number of times in the opposite directions.
+If a cycle on metagraph corresponds to cycles on all expansions, then its characteristic is $0$ independently of the selected weights. Hence this cycle walks through each of its edges the same number of times in the opposite directions.
 
 Path can not walk through the same edge twice in a row, so its structure consists of several cycles, which are glued in a vertex of degree $3$ or greater. This structure corresponds to $(\mu + \eta)$-graph possibly glued with some additional paths. The length of such a cycle is at least $2(|\mu| + |\eta|)$. By the previous theorem, its length is at most $2(|\mu| + |\eta|)$. Thus the length of such a cycle is precisely $2 \theta$.
 
@@ -1007,7 +1008,7 @@ E-mail: {\it ArutunoffOleg@yandex.ru}
 Institute of Mathematics, Mechanics and Computer Science,\\
 Southern Federal University,\\
 Rostov-on-Don, Russia\\
-E-mail: {\it vaskorohodov@sfedu,ru}
+E-mail: {\it vaskorohodov@sfedu.ru}
 
 
 \end{document}
